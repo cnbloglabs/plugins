@@ -1,19 +1,17 @@
 {
-  "name": "acnb-plugins",
-  "description": "Vanilla JavaScript emoji popover.",
+  "name": "@awescnb/plugins",
+  "description": "Base plugins for awescnb",
   "version": "0.0.1",
   "license": "MIT",
   "author": "guangzan <guangzan1999@outlook.com> (https://www.cnblogs.com/guangzan)",
   "homepage": "https://github.com/awescnb/acnb-plugins",
   "bugs": "https://github.com/awescnb/acnb-plugins",
   "scripts": {
-    "dev": "vite --config config/vite.config.ts",
-    "build": "vite build --config config/vite.config.ts",
-    "dev:exm": "vite --config config/vite.config.exm.ts",
-    "build:exm": "vite build --config config/vite.config.exm.ts"
+    "dev": "vite",
+    "build": "vite build"
   },
   "files": [
-    "packages"
+    "src"
   ],
   "exports": {
     ".": {
@@ -27,5 +25,9 @@
   },
   "keywords": [
     "acnb-plugins"
-  ]
+  ],
+  "dependencies": {
+    "scss": "^0.2.4",
+    "vite": "^2.5.3"
+  }
 }
