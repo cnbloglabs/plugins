@@ -1,33 +1,46 @@
 {
-  "name": "@awescnb/plugins",
-  "description": "Base plugins for awescnb",
-  "version": "0.0.1",
-  "license": "MIT",
-  "author": "guangzan <guangzan1999@outlook.com> (https://www.cnblogs.com/guangzan)",
-  "homepage": "https://github.com/awescnb/acnb-plugins",
-  "bugs": "https://github.com/awescnb/acnb-plugins",
+  "name": "@acnb/plugins",
+  "version": "0.0.2",
+  "description": "",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "vite"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    }
   },
   "files": [
     "src"
   ],
-  "exports": {
-    ".": {
-      "import": "./packages/index.js",
-      "require": "./packages/index.js"
-    }
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/awescnb/acnb-plugins.git"
+    "url": "git+https://github.com/awescnb/acnb-plugins.git"
   },
   "keywords": [
-    "acnb-plugins"
+    "博客园"
   ],
+  "author": {
+    "name": "guangzan",
+    "url": "https://www.cnblogs.com/guangzan",
+    "email": "guangzan1999@outlook.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/awescnb/acnb-plugins/issues"
+  },
+  "homepage": "https://github.com/awescnb/acnb-plugins#readme",
   "dependencies": {
-    "scss": "^0.2.4",
-    "vite": "^2.5.3"
+    "@acnb/core": "^1.0.7",
+    "notyf": "^3.10.0",
+    "sass": "^1.42.1",
+    "vite": "^2.5.10",
+    "vite-plugin-html": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "vite-plugin-singlefile": "^0.5.1"
   }
 }
