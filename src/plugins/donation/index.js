@@ -1,10 +1,5 @@
-import { defineOptions } from '@acnb/core'
+import { useDonationOptions } from '@acnb/options'
 import { getCurrentPage } from '../../utils/cnblog'
-
-export const donationConfig = defineOptions('donationConfig', {
-  enable: false,
-  qrcodes: [],
-})
 
 /**
  * 二维码展开收起操作
@@ -19,7 +14,7 @@ function qrcodeToggle() {
 }
 
 export const donation = (theme, devOptions) => {
-  const { enable, qrcodes } = donationConfig(devOptions)
+  const { enable, qrcodes } = useDonationOptions(devOptions)
 
   if (!enable) return
   if (getCurrentPage() !== 'post') return
@@ -28,7 +23,7 @@ export const donation = (theme, devOptions) => {
   const btn = `<a id="custom-donation-btn">打赏</a>`
   const qrcode = $(`<div id="custom-donation-qrcode"></div>`)
 
-  qrcodes.forEach(item => {
+  qrcodes.forEach((item) => {
     qrcode.append(`<div style="background-image: url(${item})"></div>`)
   })
 

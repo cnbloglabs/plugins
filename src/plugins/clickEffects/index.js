@@ -1,11 +1,4 @@
-import { defineOptions } from '@acnb/core'
-
-export const clickEffectsConfig = defineOptions('clickEffects', {
-  enable: false,
-  colors: [],
-  size: 30,
-  maxCount: 10,
-})
+import { useClickEffectsOptions } from '@acnb/options'
 
 function colorBall(params) {
   const defaultParams = {
@@ -116,7 +109,7 @@ function _clear(balls) {
   }, 1000)
 }
 
-const build = options => {
+const build = (options) => {
   const colorBallConfig = {
     colors: options.colors,
     size: options.size,
@@ -124,12 +117,12 @@ const build = options => {
   }
   const color = new colorBall(colorBallConfig)
 
-  $('body').click(e => {
+  $('body').click((e) => {
     color.fly(e.clientX, e.clientY)
   })
 }
 
 export const clickEffects = (theme, devOptions) => {
-  const options = clickEffectsConfig(devOptions)
+  const options = useClickEffectsOptions(devOptions)
   options.enable && build(options)
 }

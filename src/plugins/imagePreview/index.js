@@ -3,16 +3,12 @@
  * 1. 随笔详情页图片灯箱已移除，博客园已拥有此功能
  * 2. 相册查看图像
  */
-import { defineOptions } from '@acnb/core'
+import { useImagePreviewOptions } from '@acnb/options'
 import { poll, mousewheel, loadScript } from '../../utils/helpers'
 import { isPostDetailsPage, isMd, isAlbumPage } from '../../utils/cnblog'
 
 const mediaZoomJs =
   'https://cdn.bootcdn.net/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js'
-
-export const imagePreviewConfig = defineOptions('imagePreview', {
-  enable: true,
-})
 
 const customGalleryClass = 'custom-gallery'
 
@@ -57,7 +53,7 @@ function build() {
   // #cnblogs_post_body img,
   const imgList = $(` .blog_comment_body img, .${customGalleryClass} img`)
   if (imgList === 0) return
-  $.each(imgList, i => {
+  $.each(imgList, (i) => {
     const item = $(imgList[i])
     item.addClass('custom-zoom')
   })
@@ -74,7 +70,7 @@ function build() {
 }
 
 export const imagePreview = (theme, devOptions) => {
-  const { enable } = imagePreviewConfig(devOptions)
+  const { enable } = useImagePreviewOptions(devOptions)
 
   if (!enable) return
   if (!isMd() && !isAlbumPage() && !isPostDetailsPage()) return

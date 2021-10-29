@@ -1,15 +1,9 @@
 // 锁屏
-import { defineOptions } from '@acnb/core'
+import { useLockOptions } from '@acnb/options'
 import { loadScript } from '../../utils/helpers'
 
 const typedJs = 'https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js'
 const randomImage = 'https://api.mz-moe.cn/img.php'
-
-export const lockConfig = defineOptions('lock', {
-  enable: false,
-  background: '',
-  strings: [],
-})
 
 let typed
 
@@ -68,7 +62,7 @@ function handleClose() {
 }
 
 export const lock = (theme, devOptions) => {
-  const { enable, background, strings } = lockConfig(devOptions)
+  const { enable, background, strings } = useLockOptions(devOptions)
   if (!enable) return
   build()
   setBackground(background)

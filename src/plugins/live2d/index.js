@@ -1,21 +1,10 @@
-import live2dModels from './live2dModels'
+import { useLive2dOptions } from '@acnb/options'
 import { userAgent, loadScript, randomProperty } from '../../utils/helpers'
 import { getCurrentPage } from '../../utils/cnblog'
-import { defineOptions } from '@acnb/core'
+import live2dModels from './live2dModels'
 
 const live2dBase = 'https://cdn.jsdelivr.net/gh/guangzan/awesCnb-live2dModels'
 const live2djs = 'https://guangzan.gitee.io/imagehost/awescnb/js/live2d.min.js'
-
-export const live2dConfig = defineOptions('live2d', {
-  enable: false,
-  page: 'all',
-  agent: 'pc',
-  model: 'haru-01',
-  width: 150,
-  height: 200,
-  position: 'left',
-  gap: 'default',
-})
 
 /**
  * 构建模型容器
@@ -56,7 +45,7 @@ function loadModel(model) {
 
 export const live2d = (theme, devOptions) => {
   const { enable, page, agent, model, position, gap, width, height } =
-    live2dConfig(devOptions)
+    useLive2dOptions(devOptions)
 
   if (!enable) return
   if (page !== getCurrentPage() && page !== 'all') return

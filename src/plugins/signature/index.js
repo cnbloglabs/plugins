@@ -1,13 +1,8 @@
 // 个性签名
+import { useSignatureOptions } from '@acnb/options'
 import { loadScript } from '../../utils/helpers'
-import { defineOptions } from '@acnb/core'
 
 const typedJs = 'https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js'
-
-export const signatureConfig = defineOptions('signature', {
-  enable: false,
-  contents: [],
-})
 
 /**
  * 构建容器
@@ -32,7 +27,7 @@ function typed(contents) {
 }
 
 export const signature = (theme, devOptions, pluginOptions) => {
-  const { enable, contents } = signatureConfig(devOptions)
+  const { enable, contents } = useSignatureOptions(devOptions)
   if (!enable) return
 
   let pluginConfig = {

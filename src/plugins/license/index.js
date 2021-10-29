@@ -1,15 +1,7 @@
 // 构建随笔签名
+import { useLicenseOptions } from '@acnb/options'
 import { getCurrentPage } from '../../utils/cnblog'
 import { getBlogname, getCurrentPostUrl } from '../../utils/cnblog'
-import { defineOptions } from '@acnb/core'
-
-export const postSignatureConfig = defineOptions('postSignature', {
-  enable: true,
-  enableLicense: true,
-  content: [],
-  licenseName: '',
-  licenseLink: '',
-})
 
 const containerId = 'post-signature'
 
@@ -53,15 +45,15 @@ function buildContent(content) {
   $(`#${containerId}`).append(el)
 }
 
-export const postSignature = (theme, devOptions) => {
-  const { enable, enableLicense, content, licenseName, licenseLink } =
-    postSignatureConfig(devOptions)
+export const license = (theme, devOptions) => {
+  const { enable, license, licenseName, licenseLink, contents } =
+    useLicenseOptions(devOptions)
 
   if (!enable) return
   if (getCurrentPage() !== 'post') return
   if ($('#MySignature').children().length) return
 
   buildContainer()
-  buildLicense(enableLicense, licenseName, licenseLink)
-  buildContent(content)
+  buildLicense(license, licenseName, licenseLink)
+  buildContent(contents)
 }

@@ -2,12 +2,8 @@
  * 构建代码块语言
  * 仅在 Markdown 博文中生效
  */
-import { defineOptions } from '@acnb/core'
+import { useCodeLangOptions } from '@acnb/options'
 import { isPostDetailsPage, isMd } from '../../utils/cnblog'
-
-export const codeLangConfig = defineOptions('codeLang', {
-  enable: false,
-})
 
 /**
  * 创建代码语言容器
@@ -41,8 +37,7 @@ function buildCodeWrapLanguage() {
 }
 
 export const codeLang = (theme, devOptions) => {
-  // 先跟随 linenumbers 的配置
-  const { enable } = codeLangConfig(devOptions)
+  const { enable } = useCodeLangOptions(devOptions)
 
   if (!enable) return
   if (!isPostDetailsPage()) return

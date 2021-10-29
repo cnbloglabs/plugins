@@ -1,15 +1,9 @@
 // 在随笔详情页尾部图片
+import { usePostBottomImageOptions } from '@acnb/options'
 import { getCurrentPage } from '../../utils/cnblog'
-import { defineOptions } from '@acnb/core'
-
-export const postBottomImageConfig = defineOptions('postBottomImage', {
-  enable: false,
-  img: '',
-  height: '',
-})
 
 export const postBottomImage = (theme, devOptions) => {
-  const { enable, img, height } = postBottomImageConfig(devOptions)
+  const { enable, img, height } = usePostBottomImageOptions(devOptions)
 
   if (!enable) return
   if (getCurrentPage() !== 'post') return

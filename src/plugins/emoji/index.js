@@ -1,9 +1,9 @@
 // 评论输入表情
-import { defineOptions } from '@acnb/core'
+import { useEmojiOptions } from '@acnb/options'
 import { isPostDetailsPage } from '../../utils/cnblog'
 import { isUrl } from '../../utils/helpers'
 
-const emojiList = [
+const defaultemojiList = [
   {
     value: '🤣',
     label: '笑哭',
@@ -126,18 +126,14 @@ const emojiList = [
   },
 ]
 
-export const emojiConfig = defineOptions('emoji', {
-  enable: true,
-  buttonIcon: '🍺',
-  emojiList,
-})
-
 /**
  * 创建按钮
  * @returns {HTMLElement}
  */
 function createEmojiButton(buttonIcon) {
-  return `<span class="qaq-btn" title="表情">${buttonIcon}</span>`
+  return `<span class="qaq-btn" title="表情">${
+    buttonIcon.length ? buttonIcon : '🍺'
+  }</span>`
 }
 
 /**
@@ -169,9 +165,10 @@ function createEmojiItem(itemData) {
  * @returns {JQuery Object}
  */
 function createEmojiList(emojiList) {
+  if (!emojiList.length) emojiList = defaultemojiList
   const $emoji = $(`<div class="emoji-list"></div>`)
 
-  emojiList.forEach(item => {
+  emojiList.forEach((item) => {
     const emojiItem = createEmojiItem(item)
     $emoji.append(emojiItem)
   })
@@ -189,7 +186,7 @@ function createEmojiContainer() {
 
 /**
  * 创建表情面板蒙层
- * @returns @returns {JQuery Object}
+ * @returns {JQuery Object}
  */
 function createMask() {
   return $(`<div>`).addClass('qaq-mask')
@@ -249,7 +246,7 @@ function createEmoji(emojiData, buttonIcon) {
 }
 
 export const emoji = (_theme, devOptions) => {
-  const { enable, emojiList, buttonIcon } = emojiConfig(devOptions)
+  const { enable, emojiList, buttonIcon } = useEmojiOptions(devOptions)
 
   if (!enable) return
   if (!isPostDetailsPage()) return

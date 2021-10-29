@@ -2,12 +2,21 @@
 # yarn lockfile v1
 
 
-"@acnb/core@^1.0.6", "@acnb/core@^1.0.7":
+"@acnb/core@^1.0.1", "@acnb/core@^1.0.6", "@acnb/core@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@acnb/core/-/core-1.0.7.tgz#75629c5118016c8bf56837aa176c8063c11652ea"
   integrity sha512-m3Ih2bt8La9DM4KmQtGwNlnU+8VB6GpdIKPc4xLkEb4M6K3/zM9OEKzFXNk9zqkIhcELzhOU/skz/ZXGCqZl1g==
   dependencies:
     "@acnb/core" "^1.0.6"
+    vite "^2.5.1"
+
+"@acnb/options@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@acnb/options/-/options-0.0.8.tgz#7613443001c70b9eac67821748b3b8906961e9ac"
+  integrity sha512-vg5q2Nx/18yvSNTNQbZWrR+E7cObeDfbc6zjhbCv7f79dJ8t+qtyO/dYBA/EVG3OsBQg7dqrg3FGkAhjEgsNdg==
+  dependencies:
+    "@acnb/core" "^1.0.1"
+    "@types/node" "^16.7.2"
     vite "^2.5.1"
 
 "@rollup/plugin-node-resolve@^11.2.0":
@@ -48,6 +57,11 @@
   version "16.10.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.10.2.tgz#5764ca9aa94470adb4e1185fe2e9f19458992b2e"
   integrity sha512-zCclL4/rx+W5SQTzFs9wyvvyCwoK9QtBpratqz2IYJ3O8Umrn0m3nsTv0wQBk9sRGpvUe9CwPDrQFB10f1FIjQ==
+
+"@types/node@^16.7.2":
+  version "16.11.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.6.tgz#6bef7a2a0ad684cf6e90fcfe31cecabd9ce0a3ae"
+  integrity sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==
 
 "@types/resolve@1.17.1":
   version "1.17.1"

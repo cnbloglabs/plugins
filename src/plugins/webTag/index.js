@@ -1,10 +1,5 @@
 // 设置网站图标和标题
-import { defineOptions } from '@acnb/core'
-
-export const themeConfig = defineOptions('theme', {
-  title: '',
-  favicon: '',
-})
+import { useWebTagOptions } from '@acnb/options'
 
 /**
  * 构建网页标题
@@ -31,8 +26,8 @@ function setFavicon(favicon) {
   }
 }
 
-export const titleFavicon = (theme, devOptions) => {
-  const { enable, title, favicon } = themeConfig(devOptions)
+export const webTag = (theme, devOptions) => {
+  const { enable, title, favicon } = useWebTagOptions(devOptions)
   if (!enable) return
   setTitle(title)
   setFavicon(favicon)

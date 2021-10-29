@@ -1,12 +1,7 @@
+import { useToolsOptions } from '@acnb/options'
 import toast from '../toast'
 import { getCurrentPage, likePost } from '../../utils/cnblog'
 import { isPhone } from '../../utils/helpers'
-import { defineOptions } from '@acnb/core'
-
-export const toolsConfig = defineOptions('tools', {
-  initialOpen: true,
-  mobileAutoClose: true,
-})
 
 /**
  * 创建 toolbar 容器
@@ -87,7 +82,7 @@ function createToolbarItem(item, translateY) {
 function createToolbar(finalPluginOptions) {
   const toolItem = finalPluginOptions.toolbarItems
   const $toolbar = createToolbarContainer()
-  const pageCondition = page => {
+  const pageCondition = (page) => {
     return page === getCurrentPage() || page === 'all'
   }
   // const effectiveLength = toolItem.filter(item => pageCondition(item.page))
@@ -96,7 +91,7 @@ function createToolbar(finalPluginOptions) {
 
   let translateY = 0
 
-  toolItem.forEach(item => {
+  toolItem.forEach((item) => {
     if (!item.enable) return
     if (pageCondition(item.page)) {
       const $item = createToolbarItem(item, translateY)
@@ -116,7 +111,7 @@ function createToolbar(finalPluginOptions) {
 function handleToggle() {
   $('.toolbar-item-toggle').toggleClass('extend')
 
-  const transformed = translateY => {
+  const transformed = (translateY) => {
     let _translateY = translateY
     $('.toolbar-item:not(.toolbar-item-toggle)').each(function (index, item) {
       $(item).css({
@@ -126,10 +121,10 @@ function handleToggle() {
     })
   }
 
-  const toggleExtend = isExtend => {
+  const toggleExtend = (isExtend) => {
     const text = isExtend ? '展开' : '收起'
     const translateY = isExtend ? 90 : -50
-    const getArrow = isExtend => {
+    const getArrow = (isExtend) => {
       const arrow = isExtend ? 'down' : 'up'
       return arrow
     }
@@ -149,11 +144,11 @@ function handleToggle() {
 }
 
 export const tools = (theme, devOptions, pluginOptions) => {
-  const { enable, initialOpen } = toolsConfig(devOptions)
+  const { enable, initialOpen } = useToolsOptions(devOptions)
   if (!enable) return
 
   const pluginDefaultOptions = {
-    menuIcon: 'fa-angle-up',
+    menuIcon: '➕',
     toolbarItems: [
       {
         enable: true,

@@ -1,5 +1,5 @@
 // 弹幕
-import { defineOptions } from '@acnb/core'
+import { useBarragesOptions } from '@acnb/options'
 import { getCurrentPage } from '../../utils/cnblog'
 import {
   getClientRect,
@@ -7,29 +7,6 @@ import {
   randomColor,
   sleep,
 } from '../../utils/helpers'
-
-export const barrageConfig = defineOptions({
-  enable: false,
-  opacity: 0.6,
-  fontSize: '20px',
-  colors: [
-    '#FE0302',
-    '#FF7204',
-    '#FFAA02',
-    '#FFD302',
-    '#FFFF00',
-    '#A0EE00',
-    '#00CD00',
-    '#019899',
-    '#4266BE',
-    '#89D5FF',
-    '#CC0273',
-    '#CC0273',
-  ],
-  barrages: [],
-  indexBarrages: [],
-  postPageBarrages: [],
-})
 
 /**
  * @description 发送弹幕
@@ -46,13 +23,30 @@ async function shootBarrage(textList, enable, opacity, colors, fontSize) {
   const wrapWidth = rect.right - rect.left
   const wrapHeight = rect.bottom - rect.top
 
+  const defaultColors = [
+    '#FE0302',
+    '#FF7204',
+    '#FFAA02',
+    '#FFD302',
+    '#FFFF00',
+    '#A0EE00',
+    '#00CD00',
+    '#019899',
+    '#4266BE',
+    '#89D5FF',
+    '#CC0273',
+    '#CC0273',
+  ]
+
+  console.log(randomColor(colors.length ? colors : defaultColors))
+
   for (let i = 0; i < textList.length; i++) {
     const text = textList[i]
     const $barrage = document.createElement('span')
     const barrageStyle = `
 									left: ${wrapWidth}px;
 									top: ${randomNum(wrapHeight - 30, 1)}px;
-									color: ${randomColor(colors)};
+									color: ${randomColor(colors.length ? colors : defaultColors)};
 									opacity: ${opacity};
 									font-size: ${fontSize};
 								`
@@ -61,7 +55,7 @@ async function shootBarrage(textList, enable, opacity, colors, fontSize) {
     $barrage.innerText = text
     $wrap.appendChild($barrage)
 
-    const roll = timer => {
+    const roll = (timer) => {
       const now = +new Date()
       const rect = getClientRect($barrage)
       let left = $barrage.offsetLeft
@@ -87,6 +81,7 @@ async function shootBarrage(textList, enable, opacity, colors, fontSize) {
 }
 
 export const barrage = (theme, devOptions) => {
+  const page = getCurrentPage()
   const {
     enable,
     opacity,
@@ -95,13 +90,13 @@ export const barrage = (theme, devOptions) => {
     barrages,
     indexBarrages,
     postPageBarrages,
-  } = barrageConfig(devOptions)
-  const page = getCurrentPage()
+  } = useBarragesOptions(devOptions)
 
   if (barrages.length) {
-    setTimeout(() => {
-      shootBarrage(barrages, enable, opacity, colors, fontSize)
-    }, 3000)
+    setTimeout(
+      () => shootBarrage(barrages, enable, opacity, colors, fontSize),
+      3000
+    )
   }
 
   // if (page === 'post' && postPageBarrages.length) {

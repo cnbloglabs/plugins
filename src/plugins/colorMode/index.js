@@ -3,11 +3,7 @@
  * 需要皮肤使用相关 css 自定义属性
  */
 import { randomColor } from '../../utils/helpers'
-import { defineOptions } from '@acnb/core'
-
-export const themeConfig = defineOptions('theme', {
-  color: '#FFB3CC',
-})
+import { useThemeOptions } from '@acnb/options'
 
 /**
  * 将 16 进制颜色转成 rgb 或 rgba
@@ -57,7 +53,8 @@ function insertStyle(color) {
   )
 }
 
-export const themeColor = (theme, devOptions) => {
-  const { color } = themeConfig(devOptions)
+export const colorMode = (theme, devOptions) => {
+  const { color } = useThemeOptions(devOptions)
+  console.log(color)
   insertStyle(color)
 }

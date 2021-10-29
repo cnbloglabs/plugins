@@ -1,11 +1,4 @@
-import { defineOptions } from '@acnb/core'
-
-export const darkModeConfig = defineOptions('mode', {
-  enable: true,
-  darkDefault: false,
-  autoDark: false,
-  autoLight: false,
-})
+import { useDarkModeOptions } from '@acnb/options'
 
 /**
  * 在暗色皮肤和亮色皮肤之间切换
@@ -115,7 +108,7 @@ function click() {
 
 export const mode = (theme, devOptions) => {
   const { enable, darkDefault, autoDark, autoLight } =
-    darkModeConfig(devOptions)
+    useDarkModeOptions(devOptions)
   if (!enable) return
   init(darkDefault, autoDark, autoLight)
   click()

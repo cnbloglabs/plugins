@@ -1,9 +1,7 @@
 import { createTheme } from '@acnb/core'
-import { background, clickEffects } from '../packages/index'
-import '../packages/tools/index.scss'
+import { tools } from '../src/index'
+import '../src/plugins/tools/index.scss'
 
 const theme = createTheme()
 
-theme.use(background, { enable: true, value: 'red' }).use(clickEffects, {
-  enable: true,
-})
+theme.use(tools, { enable: true })

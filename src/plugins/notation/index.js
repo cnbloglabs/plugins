@@ -1,15 +1,20 @@
+import { useNotationOptions } from '@acnb/options'
 import { loadScript } from '../../utils/helpers'
 import { getCurrentPage } from '../../utils/cnblog'
-import { defineOptions } from '@acnb/core'
 
 const notationJs =
   'https://unpkg.com/rough-notation@0.4.0/lib/rough-notation.iife.js'
 
-export const notationConfig = defineOptions('mode', {
-  enable: true,
-})
-
-const annotateList = []
+const annotateList = [
+  {
+    page: 'all',
+    selector: '#Header1_HeaderTitle',
+    config: {
+      type: 'underline',
+      color: '#2196F3',
+    },
+  },
+]
 
 /**
  * 构建 annotate group
@@ -49,9 +54,9 @@ const buildNotation = (annotate, annotationGroup, customList) => {
   }, 2000)
 }
 
-export const donation = (theme, devOptions, customList = annotateList) => {
+export const notation = (theme, devOptions, customList = annotateList) => {
   if (getCurrentPage() !== 'post') return
-  const { enable } = notationConfig(devOptions)
+  const { enable } = useNotationOptions(devOptions)
   if (!enable) return
   if (!customList.length) return
 
@@ -60,15 +65,3 @@ export const donation = (theme, devOptions, customList = annotateList) => {
     buildNotation(annotate, annotationGroup, customList)
   })
 }
-
-// How to use ?
-// const annotateList = [
-//     {
-//         page: 'all',
-//         selector: '#Header1_HeaderTitle',
-//         config: {
-//             type: 'underline',
-//             color: '#2196F3',
-//         },
-//     },
-// ]

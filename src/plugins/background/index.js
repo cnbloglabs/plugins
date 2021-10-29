@@ -1,12 +1,5 @@
-import { defineOptions } from '@acnb/core'
+import { useBackgroundOptions } from '@acnb/options'
 import { userAgent, isUrl } from '../../utils/helpers'
-
-export const backgroundConfig = defineOptions('bodyBackground', {
-  enable: false,
-  value: '',
-  opacity: 0.85,
-  repeat: false,
-})
 
 /**
  * 设置透明度
@@ -43,7 +36,7 @@ function setBackground(value, repeat) {
 }
 
 export const background = (theme, devOptions, pluginOptions) => {
-  const { enable, opacity, value, repeat } = backgroundConfig(devOptions)
+  const { enable, opacity, value, repeat } = useBackgroundOptions(devOptions)
 
   if (!enable) return
 

@@ -1,11 +1,5 @@
 // 二维码
-import { defineOptions } from '@acnb/core'
-
-export const qrcodeConfig = defineOptions('qrcodeConfig', {
-  enable: false,
-  img: '',
-  desc: '',
-})
+import { useQrcodeOptions } from '@acnb/options'
 
 /**
  * 构建二维码图片
@@ -30,7 +24,7 @@ function buildDesc(desc) {
 }
 
 export const qrcode = (theme, devOptions) => {
-  const { enable, img, desc } = qrcodeConfig(devOptions)
+  const { enable, img, desc } = useQrcodeOptions(devOptions)
 
   if ($('#blog-news').length === 0) return
   if (!enable) return

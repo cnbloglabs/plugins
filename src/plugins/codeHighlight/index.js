@@ -1,11 +1,6 @@
-import { defineOptions } from '@acnb/core'
+import { useCodeHighlightOptions } from '@acnb/options'
 import { getCurrentPage, isMd } from '../../utils/cnblog'
 import themes from './themes.js'
-
-export const highlightConfig = defineOptions('codeHighlight', {
-  dark: 'atomOneDark',
-  light: 'atomOneLight',
-})
 
 /**
  * 构建 Markdown 代码块高亮
@@ -31,6 +26,6 @@ export const codeHighlight = (theme, devOptions) => {
   if (getCurrentPage() !== 'post') return
   if ($('pre').length === 0) return
 
-  const { light, dark } = highlightConfig(devOptions)
+  const { light, dark } = useCodeHighlightOptions(devOptions)
   buildMarkdownHighlight(light, dark)
 }

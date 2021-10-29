@@ -1,11 +1,6 @@
-import { defineOptions } from '@acnb/core'
+import { useCatalogOptions } from '@acnb/options'
 import { userAgent, getClientRect, debounce } from '../../utils/helpers'
 import { getCurrentPage, hasPostTitle } from '../../utils/cnblog'
-
-export const catalogConfig = defineOptions('catalog', {
-  enable: true,
-  position: 'left',
-})
 
 /**
  * 构建目录容器
@@ -78,6 +73,7 @@ function buildCatalog(selector, fn, showTitle) {
   const container = buildCatalogContainer(showTitle)
   const catalogList = buildCatalogList()
   const catalog = container.append(catalogList)
+  console.log(selector, fn)
   $(selector)[fn]($(catalog))
 }
 
@@ -185,24 +181,16 @@ function setScrollbar(showScrollbar) {
 
 export function catalog(theme, devOptions, pluginOptions = {}) {
   const extraOptions = {
-    selector: '',
-    fn: 'before',
+    mountedNode: 'body',
+    fn: 'append',
     scrollContainer: window,
     updateNavigation: false,
     showTitle: true,
     showScrollbar: true,
   }
-
   $.extend(true, extraOptions, pluginOptions)
-  const { enable } = catalogConfig(devOptions)
-  const {
-    selector,
-    fn,
-    scrollContainer,
-    updateNavigation,
-    showTitle,
-    showScrollbar,
-  } = extraOptions
+
+  const { enable } = useCatalogOptions(devOptions)
 
   if (
     enable &&
@@ -210,9 +198,13 @@ export function catalog(theme, devOptions, pluginOptions = {}) {
     getCurrentPage() === 'post' &&
     userAgent() === 'pc'
   ) {
-    buildCatalog(selector, fn, showTitle)
-    handleScroll(scrollContainer, updateNavigation)
+    buildCatalog(
+      extraOptions.mountedNode,
+      extraOptions.fn,
+      extraOptions.showTitle
+    )
+    handleScroll(extraOptions.scrollContainer, extraOptions.updateNavigation)
     toggle()
-    setScrollbar(showScrollbar)
+    setScrollbar(extraOptions.showScrollbar)
   }
 }

@@ -1,17 +1,10 @@
 // 在随笔详情页顶部随笔生成一个文章头图
-// 引入即可
+import { usePostTopimageOptions } from '@acnb/options'
 import { randomImgurl, randomArrayElements } from '../../utils/helpers'
 import { isPostDetailsPage } from '../../utils/cnblog'
-import { defineOptions } from '@acnb/core'
-
-export const postTopimageConfig = defineOptions('postTopImage', {
-  enable: false,
-  fixed: false,
-  imgs: [],
-})
 
 export const postTopImage = (theme, devOptions) => {
-  const { enable, imgs, fixed } = postTopimageConfig(devOptions)
+  const { enable, imgs, fixed } = usePostTopimageOptions(devOptions)
 
   if (!enable) return
   if (!isPostDetailsPage()) return

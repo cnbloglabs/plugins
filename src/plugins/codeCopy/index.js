@@ -1,14 +1,10 @@
 /**
  * 构建代码块复制按钮
  */
+import { useCodeCopyOptions } from '@acnb/options'
 import { isPostDetailsPage, isMd } from '../../utils/cnblog'
-import toast from '../toast'
 import { copyToClipboard } from '../../utils/helpers'
-import { defineOptions } from '@acnb/core'
-
-export const codeCopyConfig = defineOptions('codeCopy', {
-  enable: true,
-})
+import toast from '../toast'
 
 /**
  * 创建复制按钮
@@ -30,7 +26,7 @@ function handleCopyCode(code) {
         $('.copy-btns').text('复制代码')
       }, 1500)
     })
-    .catch(err => {
+    .catch((err) => {
       console.error('无法复制', err)
     })
 }
@@ -82,7 +78,7 @@ function mountButtons() {
 }
 
 export const codeCopy = () => {
-  const { enable } = codeCopyConfig()
+  const { enable } = useCodeCopyOptions()
 
   if (!enable) return
   if (!isPostDetailsPage()) return
