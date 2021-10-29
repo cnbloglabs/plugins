@@ -248,7 +248,7 @@ function createEmoji(emojiData, buttonIcon) {
   selectEmoji()
 }
 
-export const donation = (_theme, devOptions) => {
+export const emoji = (_theme, devOptions) => {
   const { enable, emojiList, buttonIcon } = emojiConfig(devOptions)
 
   if (!enable) return
