@@ -73,7 +73,6 @@ function buildCatalog(selector, fn, showTitle) {
   const container = buildCatalogContainer(showTitle)
   const catalogList = buildCatalogList()
   const catalog = container.append(catalogList)
-  console.log(selector, fn)
   $(selector)[fn]($(catalog))
 }
 

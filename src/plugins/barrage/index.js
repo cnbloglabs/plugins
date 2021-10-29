@@ -38,8 +38,6 @@ async function shootBarrage(textList, enable, opacity, colors, fontSize) {
     '#CC0273',
   ]
 
-  console.log(randomColor(colors.length ? colors : defaultColors))
-
   for (let i = 0; i < textList.length; i++) {
     const text = textList[i]
     const $barrage = document.createElement('span')

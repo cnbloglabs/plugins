@@ -55,6 +55,5 @@ function insertStyle(color) {
 
 export const colorMode = (theme, devOptions) => {
   const { color } = useThemeOptions(devOptions)
-  console.log(color)
   insertStyle(color)
 }
