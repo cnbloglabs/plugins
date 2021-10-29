@@ -1,7 +1,7 @@
 import { createTheme } from '@acnb/core'
-import { tools } from '../src/index'
-import '../src/plugins/tools/index.scss'
+import { notice } from '../src/index'
+import '../src/plugins/notice/index.scss'
 
 const theme = createTheme()
 
-theme.use(tools, { enable: true })
+theme.use(notice, { enable: true })

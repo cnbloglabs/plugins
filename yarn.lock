@@ -10,10 +10,10 @@
     "@acnb/core" "^1.0.6"
     vite "^2.5.1"
 
-"@acnb/options@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@acnb/options/-/options-0.0.9.tgz#7e1852413e93f68f7591b21cfa6291f4d1defa7c"
-  integrity sha512-KZsqchwr5umEboohoEveQpSphQjpJ/fRFXSGZJ+OZtgwqZc/UnFWBkJPmYygnTfwra/6y2lh2nY7I2zEFTQ+Ig==
+"@acnb/options@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@acnb/options/-/options-0.1.0.tgz#adaffa773848a5f4a1087d4ffe9b60fc3f781f07"
+  integrity sha512-CZ1YsoYwOUL7r66x/fpUGN8LhC+YiceFxLItBr+yBuHngTA1IXkEg2YJWz0YBURG6zHbUyQCs7cD4ONN3c8xng==
   dependencies:
     "@acnb/core" "^1.0.1"
     "@types/node" "^16.7.2"
