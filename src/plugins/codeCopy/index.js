@@ -77,8 +77,8 @@ function mountButtons() {
   }
 }
 
-export const codeCopy = () => {
-  const { enable } = useCodeCopyOptions()
+export const codeCopy = (theme, devOptions) => {
+  const { enable } = useCodeCopyOptions(devOptions)
 
   if (!enable) return
   if (!isPostDetailsPage()) return

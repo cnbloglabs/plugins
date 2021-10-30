@@ -1,7 +1,7 @@
 import { createTheme } from '@acnb/core'
-import { notice } from '../src/index'
-import '../src/plugins/notice/index.scss'
+import { codeCopy } from '../src/index'
+import '../src/plugins/codeCopy/index.scss'
 
 const theme = createTheme()
 
-theme.use(notice, { enable: true })
+theme.use(codeCopy, { enable: true })
