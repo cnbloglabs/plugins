@@ -106,7 +106,7 @@ function click() {
   })
 }
 
-export const mode = (theme, devOptions) => {
+export const darkMode = (theme, devOptions) => {
   const { enable, darkDefault, autoDark, autoLight } =
     useDarkModeOptions(devOptions)
   if (!enable) return
