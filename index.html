@@ -2,22 +2,56 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./images/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>awescnb</title>
+    <title>acnb·plugins</title>
 
     <style>
-      .hello {
-        margin: 80px 0 0;
-        text-align: center;
-        font-size: 32px;
+      h1::before {
+        transform: scaleX(0);
+        transform-origin: bottom right;
+      }
+
+      h1:hover::before {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      h1::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        inset: 0 0 0 0;
+        background: hsl(200 100% 80%);
+        z-index: -1;
+        transition: transform 0.3s ease;
+      }
+      h1 {
+        position: relative;
+        margin: 60px auto 0;
+        font-size: 5rem;
+        width: 280px;
+      }
+      h1 div {
+        border-bottom: 4px solid #1b86f9;
         color: #333;
+        font-size: 32px;
+        line-height: 1.5em;
+      }
+      h1 span {
+        color: #1b86f9;
       }
     </style>
   </head>
   <body>
     <div id="root">
-      <h1 class="hello">🌊 Hello Awescnb</h1>
+      <h1 class="title">
+        <div>🧬 Acnb <span>Plugins</span></div>
+      </h1>
       <aw-navlist></aw-navlist>
       <aw-footer></aw-footer>
     </div>
@@ -150,7 +184,7 @@
             },
           ]
 
-          pageList.forEach(item => {
+          pageList.forEach((item) => {
             const navItem = createNavItem(item)
             this.content.querySelector('.page-list').appendHTML(navItem)
           })

@@ -1,7 +1,7 @@
 import { createTheme } from '@acnb/core'
-import { codeCopy } from '../src/index'
-import '../src/plugins/codeCopy/index.scss'
+import { catalog } from '../src/index'
+import '../src/plugins/catalog/index.scss'
 
 const theme = createTheme()
 
-theme.use(codeCopy, { enable: true })
+theme.use(catalog, { enable: true }, { mountedNode: '#top_nav', fn: 'after' })
