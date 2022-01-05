@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/awescnb/acnb-plugins.git"
+    "url": "git+https://github.com/acnblogs/acnb-plugins.git"
   },
   "keywords": [
     "博客园"
@@ -29,19 +29,19 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/awescnb/acnb-plugins/issues"
+    "url": "https://github.com/acnblogs/acnb-plugins/issues"
   },
-  "homepage": "https://github.com/awescnb/acnb-plugins#readme",
+  "homepage": "https://github.com/acnblogs/acnb-plugins#readme",
   "dependencies": {
     "@acnb/core": "^1.0.7",
     "@acnb/options": "^0.1.0",
-    "notyf": "^3.10.0",
-    "sass": "^1.42.1",
-    "vite": "^2.5.10",
-    "vite-plugin-html": "^2.1.0"
+    "notyf": "^3.10.0"
   },
   "devDependencies": {
-    "@types/node": "^16.10.1",
+    "@types/node": "^16.11.19",
+    "sass": "^1.42.1",
+    "vite": "^2.5.10",
+    "vite-plugin-html": "^2.1.0",
     "vite-plugin-singlefile": "^0.5.1"
   }
 }
