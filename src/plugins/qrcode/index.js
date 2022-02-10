@@ -1,16 +1,16 @@
 // 二维码
-import { useQrcodeOptions } from '@acnb/options'
+import { useQrcodeOptions } from "@acnb/options";
 
 /**
  * 构建二维码图片
  * @param {*} img
  */
 function buildImage(img) {
-  if (img === '') return
-  const ele = `<img class='custom-qrcode' src='${img}' />`
-  $('.custom-signature').length
-    ? $('.custom-signature').after(ele)
-    : $('#blog-news').after(ele)
+  if (img === "") return;
+  const ele = `<img class='custom-qrcode' src='${img}' />`;
+  $(".custom-signature").length
+    ? $(".custom-signature").after(ele)
+    : $("#blog-news").after(ele);
 }
 
 /**
@@ -18,17 +18,17 @@ function buildImage(img) {
  * @param {*} desc
  */
 function buildDesc(desc) {
-  if (desc === '') return
-  const ele = `<div class='custom-qrcode-desc'>${desc}</div>`
-  $('.custom-qrcode').after(ele)
+  if (desc === "") return;
+  const ele = `<div class='custom-qrcode-desc'>${desc}</div>`;
+  $(".custom-qrcode").after(ele);
 }
 
 export const qrcode = (theme, devOptions) => {
-  const { enable, img, desc } = useQrcodeOptions(devOptions)
+  const { enable, img, desc } = useQrcodeOptions(devOptions);
 
-  if ($('#blog-news').length === 0) return
-  if (!enable) return
+  if ($("#blog-news").length === 0) return;
+  if (!enable) return;
 
-  buildImage(img)
-  buildDesc(desc)
-}
+  buildImage(img);
+  buildDesc(desc);
+};

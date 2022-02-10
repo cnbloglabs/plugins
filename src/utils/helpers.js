@@ -211,7 +211,7 @@ export async function sleep(time) {
  * 获取一个随机图片 url
  * @returns {string} 随机图片 url
  */
-export function randomImgurl() {
+export function randomImgUrl() {
     const animeImages = 'https://api.mz-moe.cn/img'
     const random = Math.floor(Math.random() * 950)
     const url = `${animeImages}/img${random}.jpg`

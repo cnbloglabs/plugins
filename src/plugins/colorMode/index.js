@@ -2,8 +2,8 @@
  * 设置皮肤色
  * 需要皮肤使用相关 css 自定义属性
  */
-import { randomColor } from '../../utils/helpers'
-import { useThemeOptions } from '@acnb/options'
+import { useThemeOptions } from "@acnb/options";
+import { randomColor } from "../../utils/helpers";
 
 /**
  * 将 16 进制颜色转成 rgb 或 rgba
@@ -11,17 +11,17 @@ import { useThemeOptions } from '@acnb/options'
  * @param {number} opacity
  */
 function hexToRgba(hex, opacity) {
-  if (!hex) return
-  const rgbReg = /^rgb\(/
-  if (rgbReg.test(hex)) return hex
-  const hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/
-  if (!hexReg.test(hex)) return hex
-  const red = parseInt('0x' + hex.slice(1, 3))
-  const green = parseInt('0x' + hex.slice(3, 5))
-  const blue = parseInt('0x' + hex.slice(5, 7))
-  const rgb = `rgb(${red},${green},${blue})`
-  if (!opacity) return rgb
-  return `rgba(${red},${green},${blue},${opacity})`
+  if (!hex) return;
+  const rgbReg = /^rgb\(/;
+  if (rgbReg.test(hex)) return hex;
+  const hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  if (!hexReg.test(hex)) return hex;
+  const red = parseInt("0x" + hex.slice(1, 3));
+  const green = parseInt("0x" + hex.slice(3, 5));
+  const blue = parseInt("0x" + hex.slice(5, 7));
+  const rgb = `rgb(${red},${green},${blue})`;
+  if (!opacity) return rgb;
+  return `rgba(${red},${green},${blue},${opacity})`;
 }
 
 /**
@@ -29,8 +29,8 @@ function hexToRgba(hex, opacity) {
  * @param {*} color
  */
 function buildMainColor(color) {
-  const mainColor = color === 'random' ? randomColor('rgba') : color
-  return mainColor
+  const mainColor = color === "random" ? randomColor("rgba") : color;
+  return mainColor;
 }
 
 /**
@@ -38,22 +38,22 @@ function buildMainColor(color) {
  * @param {*} color
  */
 function insertStyle(color) {
-  const primary = buildMainColor(color)
-  const primary8 = hexToRgba(primary, 0.85)
-  const primary4 = hexToRgba(primary, 0.4)
-  const primary2 = hexToRgba(primary, 0.2)
+  const primary = buildMainColor(color);
+  const primary8 = hexToRgba(primary, 0.85);
+  const primary4 = hexToRgba(primary, 0.4);
+  const primary2 = hexToRgba(primary, 0.2);
 
-  $('head').append(
+  $("head").append(
     `<style class="themeColor">:root{
             --themeColor: ${primary};
             --theme-primary-8: ${primary8};
             --theme-primary-4: ${primary4};
             --theme-primary-2: ${primary2};
         </style>`
-  )
+  );
 }
 
 export const colorMode = (theme, devOptions) => {
-  const { color } = useThemeOptions(devOptions)
-  insertStyle(color)
-}
+  const { color } = useThemeOptions(devOptions);
+  insertStyle(color);
+};

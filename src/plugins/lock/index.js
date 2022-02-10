@@ -1,17 +1,18 @@
 // 锁屏
-import { useLockOptions } from '@acnb/options'
-import { loadScript } from '../../utils/helpers'
+import { useLockOptions } from "@acnb/options";
+import { loadScript } from "../../utils/helpers";
 
-const typedJs = 'https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js'
-const randomImage = 'https://api.mz-moe.cn/img.php'
+const typedJs =
+  "https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js";
+const randomImage = "https://api.mz-moe.cn/img.php";
 
-let typed
+let typed;
 
 /**
  * 创建元素
  */
 function build() {
-  $('body').append(`
+  $("body").append(`
     <div class='lock-screen'>
         <div class="lock-screen-weather"></div>
         <div class="lock-screen-user">
@@ -20,7 +21,7 @@ function build() {
             </div>
         </div>
         <div class="lock-screen-close">🔑</div>
-    </div>`)
+    </div>`);
 }
 
 /**
@@ -28,8 +29,8 @@ function build() {
  * @param {*} background
  */
 function setBackground(background) {
-  const image = background === '' ? randomImage : background
-  $('.lock-screen').css('background-image', `url(${image})`)
+  const image = background === "" ? randomImage : background;
+  $(".lock-screen").css("background-image", `url(${image})`);
 }
 
 /**
@@ -38,37 +39,37 @@ function setBackground(background) {
  */
 function handleOpen(strings) {
   const typedOpts = {
-    strings: strings.length ? strings : ['快去自定义你的个性签名吧~'],
+    strings: strings.length ? strings : ["快去自定义你的个性签名吧~"],
     typeSpeed: 100,
-  }
-  $('#header').dblclick(function () {
-    $('body').addClass('overflow')
-    $('.lock-screen').css('top', '0')
-    typed = new Typed('.lock-screen-text span', typedOpts)
-  })
+  };
+  $("#header").dblclick(function () {
+    $("body").addClass("overflow");
+    $(".lock-screen").css("top", "0");
+    typed = new Typed(".lock-screen-text span", typedOpts);
+  });
 }
 
 /**
  * 关闭锁屏
  */
 function handleClose() {
-  $(document).on('click', '.lock-screen-close', () => {
-    $('.lock-screen').css('top', '-100vh')
-    typed.destroy()
+  $(document).on("click", ".lock-screen-close", () => {
+    $(".lock-screen").css("top", "-100vh");
+    typed.destroy();
     setTimeout(() => {
-      $('body').removeClass('overflow')
-    }, 400)
-  })
+      $("body").removeClass("overflow");
+    }, 400);
+  });
 }
 
 export const lock = (theme, devOptions) => {
-  const { enable, background, strings } = useLockOptions(devOptions)
-  if (!enable) return
-  build()
-  setBackground(background)
+  const { enable, background, strings } = useLockOptions(devOptions);
+  if (!enable) return;
+  build();
+  setBackground(background);
 
   loadScript(typedJs, () => {
-    handleOpen(strings)
-    handleClose()
-  })
-}
+    handleOpen(strings);
+    handleClose();
+  });
+};
