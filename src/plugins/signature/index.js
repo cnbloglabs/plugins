@@ -1,9 +1,7 @@
 // 个性签名
 import { useSignatureOptions } from "@acnb/options";
 import { loadScript } from "../../utils/helpers";
-
-const typedJs =
-  "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/typed.js/2.0.11/typed.min.js";
+import { typedJs } from "../../constants/cdn";
 
 /**
  * 构建容器

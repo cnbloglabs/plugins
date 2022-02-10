@@ -1,9 +1,8 @@
 // 锁屏
 import { useLockOptions } from "@acnb/options";
 import { loadScript } from "../../utils/helpers";
+import { typedJs } from "../../constants/cdn";
 
-const typedJs =
-  "https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js";
 const randomImage = "https://api.mz-moe.cn/img.php";
 
 let typed;

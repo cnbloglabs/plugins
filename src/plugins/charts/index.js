@@ -1,25 +1,24 @@
-import { useChartsOptions } from '@acnb/options'
-import { loadScript } from '../../utils/helpers'
-
-const chartJs = 'https://cdn.jsdelivr.net/npm/chart.js'
+import { useChartsOptions } from "@acnb/options";
+import { loadScript } from "../../utils/helpers";
+import { chartJs } from "../../constants/cdn";
 
 /**
  * 构建图表容器
  */
 function createChartContainer(mountedNode) {
-  const container = $('<div id="chart"></div>')
-  const el = '<canvas id="myChart"></canvas>'
-  container.append(el)
-  $(mountedNode).append(container)
+  const container = $('<div id="chart"></div>');
+  const el = '<canvas id="myChart"></canvas>';
+  container.append(el);
+  $(mountedNode).append(container);
 }
 
 function createChart(labels, datasets) {
-  const _Chart = window.Chart
+  const _Chart = window.Chart;
 
-  _Chart.defaults.color = '#999'
+  _Chart.defaults.color = "#999";
 
   const config = {
-    type: 'radar',
+    type: "radar",
     data: {
       labels,
       datasets,
@@ -38,24 +37,24 @@ function createChart(labels, datasets) {
         // },
       },
     },
-  }
-  new _Chart(document.getElementById('myChart'), config)
+  };
+  new _Chart(document.getElementById("myChart"), config);
 }
 
 export const charts = (theme, devOptions, pluginOptions) => {
-  const { enable, labels, datasets } = useChartsOptions(devOptions)
-  if (!enable) return
+  const { enable, labels, datasets } = useChartsOptions(devOptions);
+  if (!enable) return;
 
   const { mountedNode } = Object.assign(
     {},
     {
-      mountedNode: '#sidebar_news',
+      mountedNode: "#sidebar_news",
     },
     pluginOptions
-  )
+  );
 
   loadScript(chartJs, () => {
-    createChartContainer(mountedNode)
-    createChart(labels, datasets)
-  })
-}
+    createChartContainer(mountedNode);
+    createChart(labels, datasets);
+  });
+};
