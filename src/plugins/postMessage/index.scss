@@ -4,16 +4,18 @@ $postMessage: map-merge(
     (
         categoriesBackground: #ff6b6b,
         tagsBackground: #22a6b3 #0097e6 #fbc531 #10ac84,
-        tagsColor: #333,
+        colorCategories: #fff,
+        colorTags: #333,
         colorMessage: #999,
     ),
     $postMessage
 );
 
+$color-categories: map-get($postMessage, colorCategories);
+$color-tags: map-get($postMessage, colorTags);
 $color-message: map-get($postMessage, colorMessage);
 $postMessageTagBackground: map-get($postMessage, tagsBackground);
 $categoriesBackground: map-get($postMessage, categoriesBackground);
-$tagsColor: map-get($postMessage, tagsColor);
 
 .post-message {
     display: flex;
@@ -42,7 +44,7 @@ $tagsColor: map-get($postMessage, tagsColor);
     .message-categories {
         margin: 0 16px 0 0;
         a {
-            color: $tagsColor;
+            color: $color-categories;
             background-color: $categoriesBackground;
             border: 1px solid $categoriesBackground;
         }
@@ -50,7 +52,7 @@ $tagsColor: map-get($postMessage, tagsColor);
     .message-tags {
         a {
             border: 1px solid;
-            color: $tagsColor;
+            color: $color-tags;
         }
     }
 }
