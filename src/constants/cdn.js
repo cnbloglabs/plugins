@@ -4,7 +4,7 @@ export const mediaZoomJs =
 export const APlayerJs =
   "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js";
 export const APlayerCss =
-  "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js";
+  "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css";
 export const notationJs =
   "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/rough-notation/0.5.1/rough-notation.iife.min.js";
 export const typedJs =
