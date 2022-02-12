@@ -5,10 +5,12 @@ $postMessage: map-merge(
         categoriesBackground: #ff6b6b,
         tagsBackground: #22a6b3 #0097e6 #fbc531 #10ac84,
         tagsColor: #333,
+        colorMessage: #999,
     ),
     $postMessage
 );
 
+$color-message: map-get($postMessage, colorMessage);
 $postMessageTagBackground: map-get($postMessage, tagsBackground);
 $categoriesBackground: map-get($postMessage, categoriesBackground);
 $tagsColor: map-get($postMessage, tagsColor);
@@ -40,7 +42,7 @@ $tagsColor: map-get($postMessage, tagsColor);
     .message-categories {
         margin: 0 16px 0 0;
         a {
-            color: #fff;
+            color: $tagsColor;
             background-color: $categoriesBackground;
             border: 1px solid $categoriesBackground;
         }
@@ -62,7 +64,7 @@ $tagsColor: map-get($postMessage, tagsColor);
 .message-bottom {
     display: flex;
     gap: 8px;
-    color: #999;
+    color: $color-message;
     white-space: nowrap;
     overflow: auto;
     font-size: 13px;
