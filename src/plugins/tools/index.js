@@ -2,6 +2,33 @@ import { useToolsOptions } from "@acnb/options";
 import toast from "../toast";
 import { getCurrentPage, likePost } from "../../utils/cnblog";
 import { isPhone } from "../../utils/helpers";
+import { __DEV__ } from "../../constants/env";
+
+/**
+ * 滚动到评论输入框
+ * @param {string} container
+ */
+function scrollToComment(container) {
+    $(container).animate(
+        {
+            scrollTop: $("#mainContent")[0].scrollHeight,
+        },
+        300
+    );
+}
+
+/**
+ * 滚动到顶部
+ * @param {string} container
+ */
+function scrollToTop(container) {
+    $(container).animate(
+        {
+            scrollTop: 0,
+        },
+        200
+    );
+}
 
 /**
  * 创建 toolbar 容器
@@ -53,23 +80,28 @@ function createToggleItem(menuIcon) {
  * 创建 toolbar 按钮项
  * @param {object} item
  * @param {number} translateY
+ * @param {object} config 合并后的配置对象
  * @returns {object} toolbar 按钮的 jq 对象
  */
-function createToolbarItem(item, translateY) {
+function createToolbarItem(item, translateY, finalPluginOptions) {
+    const { className, callback, icon, tooltip } = item;
+
     const $item = $(
         `<div class="toolbar-item" style="transform: translateY(-${translateY}px)">`
     );
 
-    if (item.className) {
-        $item.addClass(item.className);
+    if (className) {
+        $item.addClass(className);
     }
 
-    $item.on("click", item.callback);
+    $item.on("click", function (e) {
+        callback(finalPluginOptions);
+    });
 
-    const icon = createIcon(item.icon);
-    const $tip = createTooltip(item.tooltip);
+    const $icon = createIcon(icon);
+    const $tip = createTooltip(tooltip);
 
-    $item.append(icon);
+    $item.append($icon);
     $item.append($tip);
 
     return $item;
@@ -80,19 +112,24 @@ function createToolbarItem(item, translateY) {
  * @param {Array<Object>} pluginOptions
  */
 function createToolbar(finalPluginOptions) {
-    const toolItem = finalPluginOptions.toolbarItems.reverse();
+    const { toolbarItems, scrollContainer } = finalPluginOptions;
     const $toolbar = createToolbarContainer();
+    const $toggleItem = createToggleItem(finalPluginOptions.menuIcon);
+
     const pageCondition = (page) => {
         return page === getCurrentPage() || page === "all";
     };
-    const $toggleItem = createToggleItem(finalPluginOptions.menuIcon);
 
     let translateY = 0;
 
-    toolItem.forEach((item) => {
+    toolbarItems.reverse().forEach((item) => {
         if (!item.enable) return;
         if (pageCondition(item.page)) {
-            const $item = createToolbarItem(item, translateY);
+            const $item = createToolbarItem(
+                item,
+                translateY,
+                finalPluginOptions
+            );
             translateY += 40;
             $toolbar.append($item);
         }
@@ -157,14 +194,7 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 page: "all",
                 icon: "🚀",
                 tooltip: "回顶",
-                callback() {
-                    $(this.scrollContainer).animate(
-                        {
-                            scrollTop: 0,
-                        },
-                        200
-                    );
-                },
+                callback: (config) => scrollToTop(config.scrollContainer),
             },
             {
                 enable: false,
@@ -191,6 +221,7 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 tooltip: "关注",
                 callback() {
                     toast("关注成功");
+                    if (__DEV__) return;
                     window.follow();
                 },
             },
@@ -200,23 +231,16 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 icon: "📌",
                 tooltip: "收藏",
                 callback() {
+                    if (__DEV__) return;
                     window.AddToWz();
                 },
             },
-
             {
                 enable: true,
                 page: "post",
                 icon: "💬",
                 tooltip: "评论",
-                callback() {
-                    $(this.scrollContainer).animate(
-                        {
-                            scrollTop: $("#mainContent")[0].scrollHeight,
-                        },
-                        300
-                    );
-                },
+                callback: (config) => scrollToComment(config.scrollContainer),
             },
         ],
     };
