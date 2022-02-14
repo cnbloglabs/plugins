@@ -30,7 +30,8 @@ $lineNumbersColor: map-get($lineNumbers, color);
         }
         .awes-linenumber {
             margin: 0;
-            padding: 16px 16px 8px 16px li {
+            padding: 16px 16px 8px 16px;
+            li {
                 font-weight: normal;
                 color: $lineNumbersColor;
                 list-style: none;
