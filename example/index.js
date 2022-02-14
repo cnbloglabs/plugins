@@ -1,7 +1,12 @@
-import { createTheme } from '@acnb/core'
-import { catalog } from '../src/index'
-import '../src/plugins/catalog/index.scss'
+import { createTheme } from "@acnb/core";
+import { codeTrafficLight, codeHighlight, codeLinenumbers } from "../src/index";
+import "../src/plugins/codeTrafficLight/index.scss";
+import "../src/plugins/codeHighlight/index.scss";
+import "../src/plugins/codeLinenumbers/index.scss";
 
-const theme = createTheme()
+const theme = createTheme();
 
-theme.use(catalog, { enable: true }, { mountedNode: '#top_nav', fn: 'after' })
+theme
+    .use(codeTrafficLight, { enable: true })
+    .use(codeHighlight, { enable: true })
+    .use(codeLinenumbers, { enable: true });
