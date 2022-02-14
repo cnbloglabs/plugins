@@ -38,8 +38,9 @@ $codeFontFamily: Consolas, Lucida Console, Monaco, Andale Mono, Ubuntu Mono,
         color: var(--hl-mono-1) !important;
         background: $background !important;
         border: none !important;
-        padding: 16px 10px 8px 26px !important;
+        padding: 16px 10px 8px 13px !important;
         font-weight: normal;
+        white-space: inherit;
     }
     .hljs-punctuation,
     .hljs-tag {
