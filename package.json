@@ -1,6 +1,6 @@
 {
     "name": "@acnb/plugins",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "",
     "main": "./src/index.js",
     "module": "./src/index.js",
@@ -34,7 +34,7 @@
     "homepage": "https://github.com/acnblogs/acnb-plugins#readme",
     "dependencies": {
         "@acnb/core": "^1.0.7",
-        "@acnb/options": "^0.1.6",
+        "@acnb/options": "^0.1.7",
         "notyf": "^3.10.0"
     },
     "devDependencies": {

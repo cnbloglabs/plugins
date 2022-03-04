@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@acnb/core@^1.0.1", "@acnb/core@^1.0.6", "@acnb/core@^1.0.7":
+"@acnb/core@^1.0.6", "@acnb/core@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@acnb/core/-/core-1.0.7.tgz#75629c5118016c8bf56837aa176c8063c11652ea"
   integrity sha512-m3Ih2bt8La9DM4KmQtGwNlnU+8VB6GpdIKPc4xLkEb4M6K3/zM9OEKzFXNk9zqkIhcELzhOU/skz/ZXGCqZl1g==
@@ -10,14 +10,19 @@
     "@acnb/core" "^1.0.6"
     vite "^2.5.1"
 
-"@acnb/options@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@acnb/options/-/options-0.1.6.tgz#aa20b5f63643e695bdeba6e52fea6bf26aa85f56"
-  integrity sha512-ygCIMFe+ALbxxRIdMa1TxmQ440idXElCuReO8njOjmnJCrBzk0Os39v1ytteBh4HvL/o/t1MEyVdtpXRxQ1a4g==
+"@acnb/core@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@acnb/core/-/core-1.0.8.tgz#99ed812f435496e5fdc9f42ae8d39db5eb3ba86f"
+  integrity sha512-ZqoHg87R4qz1FstxV9NYbfcXdd8cGSXSbcyll2QnlYEran8eLQg/MgvrIahUQeAqiyo8tEozwNLh4RDafRw2jw==
   dependencies:
-    "@acnb/core" "^1.0.1"
-    "@types/node" "^16.7.2"
-    vite "^2.5.1"
+    "@acnb/core" "^1.0.7"
+
+"@acnb/options@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@acnb/options/-/options-0.1.7.tgz#3ce27bb399011e84aacbfe847fc389a48caccf46"
+  integrity sha512-5jkc8KUqH72e88d5dep3Y3nUV7x4BSbkJW6PbW4uy6uRXh+8USDoTX/OvNaTVAdxWIW0SveBYiuTcqXBsowdjA==
+  dependencies:
+    "@acnb/core" "^1.0.8"
 
 "@rollup/plugin-node-resolve@^11.2.0":
   version "11.2.1"
@@ -58,7 +63,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.17.tgz#a8ddf6e0c2341718d74ee3dc413a13a042c45a0c"
   integrity sha512-e8PUNQy1HgJGV3iU/Bp2+D/DXh3PYeyli8LgIwsQcs1Ar1LoaWHSIT6Rw+H2rNJmiq6SNWiDytfx8+gYj7wDHw==
 
-"@types/node@^16.11.19", "@types/node@^16.7.2":
+"@types/node@^16.11.19":
   version "16.11.24"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.24.tgz#9624338b685fea65fb1aba6c7b7eb45ca2df7188"
   integrity sha512-Ezv33Rl4mIi6YdSHfIRNBd4Q9kUe5okiaw/ikvJiJDmuQZNW5kfdg7+oQPF8NO6sTcr3woIpj3jANzTXdvEZXA==
