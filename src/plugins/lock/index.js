@@ -1,5 +1,5 @@
 // 锁屏
-import { useLockOptions } from "@acnb/options";
+import { useLockScreenOptions } from "@acnb/options";
 import { loadScript } from "../../utils/helpers";
 import { typedJs } from "../../constants/cdn";
 
