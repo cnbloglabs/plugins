@@ -40,11 +40,13 @@ function createToolbarContainer() {
 
 /**
  * 创建按钮项中的图标
+ * @param {string} icon
+ * @param {string} iconType className | html
  * @returns {object}
  */
-function createIcon(icon) {
+function createIcon(icon, iconType) {
     const $icon = $("<i>");
-    icon.length > 2 ? $icon.addClass(icon) : $icon.html(icon);
+    iconType === 'className' ? $icon.addClass(icon) : $icon.html(icon);
     return $icon;
 }
 
@@ -62,18 +64,21 @@ function createTooltip(text, className) {
 
 /**
  * 创建 toggle 按钮
- * @param {string} menuIcon  icon
+ * @param {string} icon
+ * @param {boolean} isActiveIcon
  * @returns {object}
  */
-function createToggleItem(menuIcon) {
-    const ele = $(`<div class="toolbar-item toolbar-item-toggle"></div>`);
-    const icon = createIcon(menuIcon);
-    const tooltip = createTooltip("展开", " tooltip-toggle");
+function createToggleItem(icon, iconType, isActiveIcon) {
+    const $ele = $(`<div class="toolbar-item toolbar-item-toggle"></div>`);
+    const $icon = createIcon(icon, iconType);
+    const $tooltip = createTooltip(isActiveIcon ? "收起" : "展开", " tooltip-toggle");
 
-    ele.append(icon);
-    ele.append(tooltip);
+    isActiveIcon && $ele.addClass('active').hide()
 
-    return ele;
+    $ele.append($icon);
+    $ele.append($tooltip);
+
+    return $ele;
 }
 
 /**
@@ -84,7 +89,7 @@ function createToggleItem(menuIcon) {
  * @returns {object} toolbar 按钮的 jq 对象
  */
 function createToolbarItem(item, translateY, finalPluginOptions) {
-    const { className, callback, icon, tooltip } = item;
+    const { className, callback, icon, iconType, tooltip } = item;
 
     const $item = $(
         `<div class="toolbar-item" style="transform: translateY(-${translateY}px)">`
@@ -94,11 +99,9 @@ function createToolbarItem(item, translateY, finalPluginOptions) {
         $item.addClass(className);
     }
 
-    $item.on("click", function (e) {
-        callback(finalPluginOptions);
-    });
+    $item.on("click", () => callback(finalPluginOptions));
 
-    const $icon = createIcon(icon);
+    const $icon = createIcon(icon, iconType);
     const $tip = createTooltip(tooltip);
 
     $item.append($icon);
@@ -112,9 +115,17 @@ function createToolbarItem(item, translateY, finalPluginOptions) {
  * @param {Array<Object>} pluginOptions
  */
 function createToolbar(finalPluginOptions) {
-    const { toolbarItems, scrollContainer } = finalPluginOptions;
+    const {
+        toolbarItems,
+        scrollContainer,
+        menuIcon,
+        menuActiveIcon,
+        menuIconType
+    } = finalPluginOptions;
+
     const $toolbar = createToolbarContainer();
-    const $toggleItem = createToggleItem(finalPluginOptions.menuIcon);
+    const $toggleItem = createToggleItem(menuIcon, menuIconType, false);
+    const $toggleActiveItem = createToggleItem(menuActiveIcon, menuIconType, true);
 
     const pageCondition = (page) => {
         return page === getCurrentPage() || page === "all";
@@ -135,7 +146,7 @@ function createToolbar(finalPluginOptions) {
         }
     });
 
-    $toolbar.append($toggleItem);
+    $toolbar.append($toggleItem).append($toggleActiveItem);
     $("body").append($toolbar);
     $(".toolbar-item-toggle").click(handleToggle);
 }
@@ -144,8 +155,6 @@ function createToolbar(finalPluginOptions) {
  * 处理展开和收起
  */
 function handleToggle() {
-    $(".toolbar-item-toggle").toggleClass("extend");
-
     const transformed = (translateY) => {
         let _translateY = translateY;
         $(".toolbar-item:not(.toolbar-item-toggle)").each(function (
@@ -160,25 +169,23 @@ function handleToggle() {
     };
 
     const toggleExtend = (isExtend) => {
-        const text = isExtend ? "展开" : "收起";
         const translateY = isExtend ? 90 : -50;
-        const getArrow = (isExtend) => {
-            const arrow = isExtend ? "down" : "up";
-            return arrow;
-        };
+        const $menuButton = $(".toolbar-item-toggle:not(.active)")
+        const $activeMenuButton = $(".toolbar-item-toggle.active")
 
-        $(".toolbar-item-toggle")
-            .find("i")
-            .removeClass(`fa-angle-${getArrow(isExtend)}`)
-            .addClass(`fa-angle-${getArrow(!isExtend)}`);
-
-        $(".tooltip-toggle").text(text);
         transformed(translateY);
+
+        if (isExtend) {
+            $menuButton.show()
+            $activeMenuButton.hide()
+        } else {
+            $menuButton.hide()
+            $activeMenuButton.show()
+        }
     };
 
-    $(".toolbar-item-toggle").hasClass("extend")
-        ? toggleExtend(false)
-        : toggleExtend(true);
+    $(".custom-toolbar").toggleClass("extend");
+    $(".custom-toolbar").hasClass("extend") ? toggleExtend(false) : toggleExtend(true);
 }
 
 export const tools = (theme, devOptions, pluginOptions) => {
@@ -187,12 +194,15 @@ export const tools = (theme, devOptions, pluginOptions) => {
 
     const pluginDefaultOptions = {
         scrollContainer: "html",
+        menuIconType: 'html', // 'className' | 'html'
         menuIcon: "➕",
+        menuActiveIcon: '➖',
         toolbarItems: [
             {
                 enable: true,
                 page: "all",
                 icon: "🚀",
+                iconType: 'html',
                 tooltip: "回顶",
                 callback: (config) => scrollToTop(config.scrollContainer),
             },
@@ -200,14 +210,16 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 enable: false,
                 page: "all",
                 icon: "🌜",
+                iconType: 'html',
                 tooltip: "深色",
                 className: "mode-change",
-                callback() {},
+                callback() { },
             },
             {
                 enable: true,
                 page: "post",
                 icon: "👍",
+                iconType: 'html',
                 tooltip: "推荐",
                 callback() {
                     toast("推荐成功");
@@ -218,6 +230,7 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 enable: true,
                 page: "post",
                 icon: "💗",
+                iconType: 'html',
                 tooltip: "关注",
                 callback() {
                     toast("关注成功");
@@ -229,6 +242,7 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 enable: true,
                 page: "post",
                 icon: "📌",
+                iconType: 'html',
                 tooltip: "收藏",
                 callback() {
                     if (__DEV__) return;
@@ -239,6 +253,7 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 enable: true,
                 page: "post",
                 icon: "💬",
+                iconType: 'html',
                 tooltip: "评论",
                 callback: (config) => scrollToComment(config.scrollContainer),
             },
