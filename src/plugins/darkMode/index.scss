@@ -2,14 +2,14 @@
 $mode: () !default;
 $mode: map-merge(
     (
-        light-bg: #fff,
-        dark-bg: #252528,
+        bg-light: #fff,
+        bg-dark: #252528,
     ),
     $mode
 );
 
-$light-bg: map-get($mode, light-bg);
-$dark-bg: map-get($mode, dark-bg);
+$bg-light: map-get($mode, bg-light);
+$bg-dark: map-get($mode, bg-dark);
 
 .dark-to-light:after {
     content: '';
@@ -20,7 +20,7 @@ $dark-bg: map-get($mode, dark-bg);
     left: 0;
     top: 0;
     margin-left: 0;
-    background-color: $dark-bg;
+    background-color: $bg-dark;
     opacity: 0.7;
     animation: toLight 0.6s linear 0s forwards;
     // pointer-events: none;
@@ -35,7 +35,7 @@ $dark-bg: map-get($mode, dark-bg);
     left: 0;
     top: 0;
     margin-left: 0;
-    background-color: $light-bg;
+    background-color: $bg-light;
     opacity: 0.7;
     animation: toDark 0.6s linear 0s forwards;
     pointer-events: none;
@@ -43,22 +43,22 @@ $dark-bg: map-get($mode, dark-bg);
 
 @keyframes toLight {
     0% {
-        background-color: $dark-bg;
+        background-color: $bg-dark;
         opacity: 0.7;
     }
     100% {
-        background-color: $light-bg;
+        background-color: $bg-light;
         opacity: 0;
     }
 }
 
 @keyframes toDark {
     0% {
-        background-color: $light-bg;
+        background-color: $bg-light;
         opacity: 0.7;
     }
     100% {
-        background-color: $dark-bg;
+        background-color: $bg-dark;
         opacity: 0;
     }
 }
