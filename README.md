@@ -5,7 +5,11 @@ Plugins for acnb.
 ## Usage
 
 ```bash
-pnpm i @acnb/plugins
+npm i @acnb/core
+```
+
+```bash
+npm i @acnb/plugins
 ```
 
 ```js
