@@ -1,3 +1,4 @@
+// 切换蒙层过渡样式
 $mode: () !default;
 $mode: map-merge(
     (
@@ -21,7 +22,7 @@ $dark-bg: map-get($mode, dark-bg);
     margin-left: 0;
     background-color: $dark-bg;
     opacity: 0.7;
-    animation: toLight 1s linear 0s forwards;
+    animation: toLight 0.6s linear 0s forwards;
     // pointer-events: none;
 }
 
@@ -36,7 +37,7 @@ $dark-bg: map-get($mode, dark-bg);
     margin-left: 0;
     background-color: $light-bg;
     opacity: 0.7;
-    animation: toDark 1s linear 0s forwards;
+    animation: toDark 0.6s linear 0s forwards;
     pointer-events: none;
 }
 
