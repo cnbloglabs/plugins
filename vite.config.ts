@@ -5,7 +5,7 @@ import { resolve } from 'path'
 export default defineConfig({
   server: {
     open: true,
-    port: 8080,
+    port: 3000,
   },
   build: {
     // cssCodeSplit: true,
