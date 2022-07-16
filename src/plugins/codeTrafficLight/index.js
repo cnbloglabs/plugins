@@ -1,5 +1,5 @@
 import { useCodeTrafficLightOptions } from "@acnb/options";
-import { isPostDetailsPage, isMd } from "../../utils/cnblog";
+import { isPostDetailsPage } from "../../utils/cnblog";
 
 function createCodeTrafficLight() {
     const trafficLight = $("<div>").addClass("cbt-traffic_light");
@@ -20,7 +20,6 @@ export function codeTrafficLight(theme, devOptions) {
 
     if (!enable) return;
     if (!isPostDetailsPage()) return;
-    if (!isMd()) return;
 
     buildCodeTrafficLight();
 }
