@@ -1,4 +1,4 @@
-import { useDarkModeOptions } from '@acnb/options'
+import { useDarkModeOptions } from "@acnb/options";
 
 /**
  * 在暗色皮肤和亮色皮肤之间切换
@@ -6,27 +6,27 @@ import { useDarkModeOptions } from '@acnb/options'
  * @param { Boolean }
  */
 function changeMode(mode, hasTransition = true) {
-  if (mode === 'dark') {
-    $('html').attr('theme', 'dark')
-    // setBackground('dark')
-    localStorage.modeType = 'dark'
-    if (hasTransition) {
-      $('body').addClass('light-to-dark')
+    if (mode === "dark") {
+        $("html").attr("theme", "dark");
+        // setBackground('dark')
+        localStorage.modeType = "dark";
+        if (hasTransition) {
+            $("body").addClass("light-to-dark");
+        }
+        setTimeout(() => {
+            $("body").removeClass("light-to-dark");
+        }, 1200);
+    } else {
+        $("html").removeAttr("theme");
+        // setBackground('light')
+        localStorage.modeType = "light";
+        if (hasTransition) {
+            $("body").addClass("dark-to-light");
+        }
+        setTimeout(() => {
+            $("body").removeClass("dark-to-light");
+        }, 1200);
     }
-    setTimeout(() => {
-      $('body').removeClass('light-to-dark')
-    }, 1200)
-  } else {
-    $('html').removeAttr('theme')
-    // setBackground('light')
-    localStorage.modeType = 'light'
-    if (hasTransition) {
-      $('body').addClass('dark-to-light')
-    }
-    setTimeout(() => {
-      $('body').removeClass('dark-to-light')
-    }, 1200)
-  }
 }
 
 /**
@@ -61,55 +61,55 @@ function changeMode(mode, hasTransition = true) {
  * @param {*} Boolean autoLight
  */
 function init(darkDefault, autoDark, autoLight) {
-  const hour = new Date().getHours()
-  const isNight = hour > 19 || hour <= 5
-  const storage = localStorage.modeType
+    const hour = new Date().getHours();
+    const isNight = hour > 19 || hour <= 5;
+    const storage = localStorage.modeType;
 
-  const followStorage = () => {
-    if (storage) {
-      storage === 'dark'
-        ? changeMode('dark', false)
-        : changeMode('light', false)
-      return
+    const followStorage = () => {
+        if (storage) {
+            storage === "dark"
+                ? changeMode("dark", false)
+                : changeMode("light", false);
+            return;
+        }
+
+        if (!storage) {
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                changeMode("dark", false);
+            } else {
+                changeMode("light", false);
+            }
+        }
+    };
+
+    if (!storage && darkDefault) {
+        changeMode("dark", false);
+        return;
     }
 
-    if (!storage) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        changeMode('dark', false)
-      } else {
-        changeMode('light', false)
-      }
+    if (isNight) {
+        autoDark ? changeMode("dark", false) : followStorage();
     }
-  }
 
-  if (!storage && darkDefault) {
-    changeMode('dark', false)
-    return
-  }
-
-  if (isNight) {
-    autoDark ? changeMode('dark', false) : followStorage()
-  }
-
-  if (!isNight) {
-    autoLight ? changeMode('light', false) : followStorage()
-  }
+    if (!isNight) {
+        autoLight ? changeMode("light", false) : followStorage();
+    }
 }
 
 /**
  * 处理皮肤切换按钮点击事件
  */
 function click() {
-  $(document).on('click', '.mode-change', () => {
-    const isDark = $('html').attr('theme')
-    isDark ? changeMode('light') : changeMode('dark')
-  })
+    $(document).on("click", ".mode-change", () => {
+        const isDark = $("html").attr("theme");
+        isDark ? changeMode("light") : changeMode("dark");
+    });
 }
 
 export const darkMode = (theme, devOptions) => {
-  const { enable, darkDefault, autoDark, autoLight } =
-    useDarkModeOptions(devOptions)
-  if (!enable) return
-  init(darkDefault, autoDark, autoLight)
-  click()
-}
+    const { enable, darkDefault, autoDark, autoLight } =
+        useDarkModeOptions(devOptions);
+    if (!enable) return;
+    init(darkDefault, autoDark, autoLight);
+    click();
+};
