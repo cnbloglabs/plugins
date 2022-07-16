@@ -2,7 +2,6 @@ import { useToolsOptions } from "@acnb/options";
 import toast from "../toast";
 import { getCurrentPage, likePost } from "../../utils/cnblog";
 import { isPhone } from "../../utils/helpers";
-import { __DEV__ } from "../../constants/env";
 
 /**
  * 滚动到评论输入框
@@ -234,7 +233,6 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 tooltip: "关注",
                 callback() {
                     toast("关注成功");
-                    if (__DEV__) return;
                     window.follow();
                 },
             },
@@ -245,7 +243,6 @@ export const tools = (theme, devOptions, pluginOptions) => {
                 iconType: 'html',
                 tooltip: "收藏",
                 callback() {
-                    if (__DEV__) return;
                     window.AddToWz();
                 },
             },

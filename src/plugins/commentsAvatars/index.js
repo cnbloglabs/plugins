@@ -1,6 +1,5 @@
 import { getCurrentPage } from "../../utils/cnblog";
 import { poll } from "../../utils/helpers";
-import { __DEV__ } from "../../constants/env";
 
 /**
  * 构建头像
@@ -11,10 +10,11 @@ function buildAvatars() {
   }
   $(".feedbackItem").each(function () {
     let avatar = $(this).children(".feedbackCon").children("span:last").html();
+
     avatar = avatar
       ? avatar.replace("http://", "https://")
       : "https://pic.cnblogs.com/face/sample_face.gif";
-    if (__DEV__) avatar = "https://www.dummyimage.com/50";
+
     const ele = `<div class='custom-comment-avatar'><img src="${avatar}" class='avatar' /></div>`;
     $(this).children(".feedbackCon").prepend(ele);
   });
@@ -74,5 +74,5 @@ function listener() {
 export const commentsAvatars = () => {
   if (getCurrentPage() !== "post") return;
   if ($(".custom-comment-avatar").lenght) return;
-  __DEV__ ? build() : listener();
+  listener();
 };
