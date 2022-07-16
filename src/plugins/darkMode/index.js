@@ -1,5 +1,4 @@
 import { useDarkModeOptions } from '@acnb/options'
-import { __DEV__ } from '../../constants/env'
 
 /**
  * 覆盖自定义背景色
@@ -31,8 +30,6 @@ import { __DEV__ } from '../../constants/env'
  * @param {string} mode 'dark' | 'light'
  */
 function setCodeTheme(mode) {
-    if (__DEV__) return
-
     mode === 'dark'
         ? window.highlighter.setTheme(window.darkModeCodeHighlightTheme)
         : window.highlighter.setTheme(window.codeHighlightTheme)
