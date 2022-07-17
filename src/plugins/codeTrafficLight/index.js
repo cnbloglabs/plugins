@@ -1,25 +1,14 @@
-import { useCodeTrafficLightOptions } from "@acnb/options";
-import { isPostDetailsPage } from "../../utils/cnblog";
-
-function createCodeTrafficLight() {
-    const trafficLight = $("<div>").addClass("cbt-traffic_light");
-    for (let index = 0; index < 3; index++) {
-        trafficLight.append($("<span>"));
-    }
-    return trafficLight;
-}
-
-function buildCodeTrafficLight() {
-    $("pre code").each(function () {
-        $(this).before(createCodeTrafficLight());
-    });
-}
+import { useCodeTrafficLightOptions } from '@acnb/options'
+import { isPostDetailsPage } from '../../utils/cnblog'
+import { insertStyle } from '../../utils/helpers'
 
 export function codeTrafficLight(theme, devOptions) {
-    const { enable } = useCodeTrafficLightOptions(devOptions);
+    const { enable } = useCodeTrafficLightOptions(devOptions)
 
-    if (!enable) return;
-    if (!isPostDetailsPage()) return;
+    if (!enable) return
+    if (!isPostDetailsPage()) return
 
-    buildCodeTrafficLight();
+    insertStyle(
+        `pre[class*='language-'].highlighter-prismjs::before,pre code.hljs::before{content:'';position:absolute;top:10px;left:12px;width:12px;height:12px;background:#fe5f59;border-radius:50%;box-shadow:20px 0 #febb2c,40px 0 #29c73f;z-index:2;}`
+    )
 }
