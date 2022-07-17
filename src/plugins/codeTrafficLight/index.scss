@@ -1,0 +1,18 @@
+pre.highlighter-hljs,
+pre[class*='language-'].highlighter-prismjs {
+  position: relative;
+    padding: 2.8em 1em 1em;
+}
+pre.highlighter-hljs::before,
+pre[class*='language-'].highlighter-prismjs::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    background: #fe5f59;
+    border-radius: 50%;
+    box-shadow: 20px 0 #febb2c, 40px 0 #29c73f;
+    z-index: 2;
+}
