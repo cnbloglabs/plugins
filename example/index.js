@@ -6,12 +6,14 @@ import {
     codeLinenumbers,
     tools,
     darkMode,
-    license
+    license,
+    emoji
 } from "../src/index";
 
 const theme = createTheme();
 
 theme
+    .use(emoji, { enable: true })
     .use(license, { enable: true })
     .use(darkMode, { enable: true })
     .use(codeTrafficLight, { enable: true })
