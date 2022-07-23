@@ -6,11 +6,13 @@ import {
     codeLinenumbers,
     tools,
     darkMode,
+    license
 } from "../src/index";
 
 const theme = createTheme();
 
 theme
+    .use(license, { enable: true })
     .use(darkMode, { enable: true })
     .use(codeTrafficLight, { enable: true })
     .use(codeHighlight, { enable: true })
