@@ -62,7 +62,7 @@ function handleClose() {
 }
 
 export const lock = (theme, devOptions) => {
-  const { enable, background, strings } = useLockOptions(devOptions);
+  const { enable, background, strings } = useLockScreenOptions(devOptions);
   if (!enable) return;
   build();
   setBackground(background);
