@@ -30,9 +30,9 @@ import { useDarkModeOptions } from '@acnb/options'
  * @param {string} mode 'dark' | 'light'
  */
 function setCodeTheme(mode) {
-    mode === 'dark'
-        ? window.highlighter.setTheme(window.darkModeCodeHighlightTheme)
-        : window.highlighter.setTheme(window.codeHighlightTheme)
+  mode === 'dark'
+    ? window.highlighter.setTheme(window.darkModeCodeHighlightTheme)
+    : window.highlighter.setTheme(window.codeHighlightTheme)
 }
 
 /**
@@ -41,18 +41,17 @@ function setCodeTheme(mode) {
  * @param {boolean} withTransition
  */
 function changeMode(mode, withTransition = true) {
-    setCodeTheme(mode)
-    $('html').attr('theme', mode)
-    localStorage.modeType = mode
+  setCodeTheme(mode)
+  $('html').attr('theme', mode)
+  localStorage.modeType = mode
 
-    const transitionClassName =
-        mode === 'dark' ? 'light-to-dark' : 'dark-to-light'
+  const transitionClassName = mode === 'dark' ? 'light-to-dark' : 'dark-to-light'
 
-    if (withTransition) {
-        $('body').addClass(transitionClassName)
-    }
+  if (withTransition) {
+    $('body').addClass(transitionClassName)
+  }
 
-    setTimeout(() => $('body').removeClass(transitionClassName), 1200)
+  setTimeout(() => $('body').removeClass(transitionClassName), 1200)
 }
 
 /**
@@ -62,52 +61,52 @@ function changeMode(mode, withTransition = true) {
  * @param {boolean} autoLight
  */
 function init(darkDefault, autoDark, autoLight) {
-    const hour = new Date().getHours()
-    const isNight = hour > 19 || hour <= 5
-    const storage = localStorage.modeType
+  const hour = new Date().getHours()
+  const isNight = hour > 19 || hour <= 5
+  const storage = localStorage.modeType
 
-    const followStorage = () => {
-        if (storage) {
-            changeMode(storage, false)
-            return
-        }
-
-        if (!storage) {
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? changeMode('dark', false)
-                : changeMode('light', false)
-        }
+  const followStorage = () => {
+    if (storage) {
+      changeMode(storage, false)
+      return
     }
 
-    if (!storage && darkDefault) {
-        changeMode('dark', false)
-        return
+    if (!storage) {
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? changeMode('dark', false)
+        : changeMode('light', false)
     }
+  }
 
-    if (isNight) {
-        autoDark ? changeMode('dark', false) : followStorage()
-    }
+  if (!storage && darkDefault) {
+    changeMode('dark', false)
+    return
+  }
 
-    if (!isNight) {
-        autoLight ? changeMode('light', false) : followStorage()
-    }
+  if (isNight) {
+    autoDark ? changeMode('dark', false) : followStorage()
+  }
+
+  if (!isNight) {
+    autoLight ? changeMode('light', false) : followStorage()
+  }
 }
 
 /**
  * 处理皮肤切换按钮点击事件
  */
 function listenToggleButtonClick() {
-    $(document).on('click', '.mode-change', () => {
-        const isDark = $('html').attr('theme') === 'dark'
-        isDark ? changeMode('light') : changeMode('dark')
-    })
+  $(document).on('click', '.mode-change', () => {
+    const isDark = $('html').attr('theme') === 'dark'
+    isDark ? changeMode('light') : changeMode('dark')
+  })
 }
 
 export const darkMode = (theme, devOptions) => {
-    const { enable, darkDefault, autoDark, autoLight } =
-        useDarkModeOptions(devOptions)
+  const { enable, darkDefault, autoDark, autoLight } =
+    useDarkModeOptions(devOptions)
 
-    if (!enable) return
-    init(darkDefault, autoDark, autoLight)
-    listenToggleButtonClick()
+  if (!enable) return
+  init(darkDefault, autoDark, autoLight)
+  listenToggleButtonClick()
 }

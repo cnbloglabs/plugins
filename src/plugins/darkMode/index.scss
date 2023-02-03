@@ -1,11 +1,10 @@
 // 切换蒙层过渡样式
-$mode: () !default;
-$mode: map-merge(
-    (
-        bg-light: #fff,
-        bg-dark: #252528,
-    ),
-    $mode
+$mode: (
+    ) !default;
+$mode: map-merge((bg-light: #fff,
+            bg-dark: #252528,
+        ),
+        $mode
 );
 
 $bg-light: map-get($mode, bg-light);
@@ -23,7 +22,7 @@ $bg-dark: map-get($mode, bg-dark);
     background-color: $bg-dark;
     opacity: 0.7;
     animation: toLight 0.6s linear 0s forwards;
-    // pointer-events: none;
+    pointer-events: none;
 }
 
 .light-to-dark:after {
@@ -46,6 +45,7 @@ $bg-dark: map-get($mode, bg-dark);
         background-color: $bg-dark;
         opacity: 0.7;
     }
+
     100% {
         background-color: $bg-light;
         opacity: 0;
@@ -57,6 +57,7 @@ $bg-dark: map-get($mode, bg-dark);
         background-color: $bg-light;
         opacity: 0.7;
     }
+
     100% {
         background-color: $bg-dark;
         opacity: 0;
