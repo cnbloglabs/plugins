@@ -64,7 +64,7 @@ $fontEmojiSize: map-get($emoji, fontEmojiSize);
 
 .emoji-list {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     padding-right: 2px;
     max-height: 200px;
     overflow-y: auto;
