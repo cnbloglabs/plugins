@@ -9,10 +9,6 @@ const defaultEmojiList = [
     label: '',
   },
   {
-    value: '🤏',
-    label: '',
-  },
-  {
     value: '👏',
     label: '',
   },
@@ -22,10 +18,6 @@ const defaultEmojiList = [
   },
   {
     value: '🎉',
-    label: '',
-  },
-  {
-    value: '❤️',
     label: '',
   },
   {
