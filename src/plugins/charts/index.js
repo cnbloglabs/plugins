@@ -55,12 +55,7 @@ export const charts = (theme, devOptions, pluginOptions) => {
     )
 
     loadScript(chartJs, () => {
-        poll(
-            () => $('#home #profile_block>a').length,
-            () => {
-                createChartContainer(mountedNode)
-                createChart(labels, datasets)
-            }
-        )
+        createChartContainer(mountedNode)
+        createChart(labels, datasets)
     })
 }
