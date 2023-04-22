@@ -5,8 +5,8 @@ dependencies:
     specifier: ^1.0.8
     version: 1.0.8
   '@acnb/options':
-    specifier: ^0.2.2
-    version: 0.2.6
+    specifier: ^0.2.8
+    version: 0.2.8
   notyf:
     specifier: ^3.10.0
     version: 3.10.0
@@ -34,8 +34,8 @@ packages:
     resolution: {integrity: sha512-ZqoHg87R4qz1FstxV9NYbfcXdd8cGSXSbcyll2QnlYEran8eLQg/MgvrIahUQeAqiyo8tEozwNLh4RDafRw2jw==}
     dev: false
 
-  /@acnb/options@0.2.6:
-    resolution: {integrity: sha512-uhYB1e/TK7zd229AM4LU5SSiW7mkcqvLH5/TgzN1rjP4Ns0iZ3sE3dTtaHWBv+sZRc+qaQOrWfcZ9PlK2TBE/Q==}
+  /@acnb/options@0.2.8:
+    resolution: {integrity: sha512-ifn2S6/S/DvAEnNJBy3DYDffPiIXcrmq4YpWQ9WRxwKz0lvgLgXH+HBLQhlPxanEa6x7SmOJNmnnQ1j4Xh1gVQ==}
     dependencies:
       '@acnb/core': 1.0.8
     dev: false
