@@ -1,6 +1,7 @@
 import { useChartsOptions } from '@acnb/options'
 import { loadScript } from '../../utils/helpers'
 import { chartJs } from '../../constants/cdn'
+import { poll } from '../../utils/helpers'
 
 /**
  * 构建图表容器
