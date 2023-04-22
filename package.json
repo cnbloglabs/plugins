@@ -34,7 +34,7 @@
   "homepage": "https://github.com/acnblogs/acnb-plugins#readme",
   "dependencies": {
     "@acnb/core": "^1.0.8",
-    "@acnb/options": "^0.2.8",
+    "@acnb/options": "^0.2.9",
     "notyf": "^3.10.0"
   },
   "devDependencies": {
