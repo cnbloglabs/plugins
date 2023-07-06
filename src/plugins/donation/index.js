@@ -1,5 +1,6 @@
 import { useDonationOptions } from '@acnb/options'
 import { getCurrentPage } from '../../utils/cnblog'
+import { poll } from '../../utils/helpers'
 
 /**
  * 二维码展开收起操作
