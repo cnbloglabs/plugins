@@ -1,5 +1,5 @@
-import { createTheme } from "@acnb/core";
-import "./index.scss";
+import { createTheme } from '@acnb/core'
+import './index.scss'
 import {
     codeTrafficLight,
     codeHighlight,
@@ -7,10 +7,11 @@ import {
     tools,
     darkMode,
     license,
-    emoji
-} from "../src/index";
+    emoji,
+    donation,
+} from '../src/index'
 
-const theme = createTheme();
+const theme = createTheme()
 
 theme
     .use(emoji, { enable: true })
@@ -19,40 +20,46 @@ theme
     .use(codeTrafficLight, { enable: true })
     .use(codeHighlight, { enable: true })
     .use(codeLinenumbers, { enable: true })
+    .use(donation, {
+        enable: true,
+        qrcodes: [
+            'https://www.cnblogs.com/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM',
+        ],
+    })
     .use(
         tools,
         { enable: true },
         {
-            menuIconType: "className",
-            menuIcon: "fa-angle-up",
-            menuActiveIcon: "fa-angle-down",
-            scrollContainer: "html",
+            menuIconType: 'className',
+            menuIcon: 'fa-angle-up',
+            menuActiveIcon: 'fa-angle-down',
+            scrollContainer: 'html',
             toolbarItems: [
                 {
-                    icon: "fa-rocket rocket-rotate",
-                    iconType: "className",
+                    icon: 'fa-rocket rocket-rotate',
+                    iconType: 'className',
                 },
                 {
                     enable: true,
-                    icon: "fa-moon",
-                    iconType: "className",
+                    icon: 'fa-moon',
+                    iconType: 'className',
                 },
                 {
-                    icon: "fa-thumbs-up",
-                    iconType: "className",
+                    icon: 'fa-thumbs-up',
+                    iconType: 'className',
                 },
                 {
-                    icon: "fa-heart",
-                    iconType: "className",
+                    icon: 'fa-heart',
+                    iconType: 'className',
                 },
                 {
-                    icon: "fa-star",
-                    iconType: "className",
+                    icon: 'fa-star',
+                    iconType: 'className',
                 },
                 {
-                    icon: "fa-comment-dots",
-                    iconType: "className",
+                    icon: 'fa-comment-dots',
+                    iconType: 'className',
                 },
             ],
         }
-    );
+    )
