@@ -1,22 +1,22 @@
-const { currentBlogApp } = window
+const { currentBlogApp } = window;
 
 /**
  * 判断访问者是否为博主
  * @returns {boolean} boolean - 是否为博主
  */
-export const isOwner = () => window.isBlogOwner
+export const isOwner = () => window.isBlogOwner;
 
 /**
  * 判断用户登录是否登录
  * @returns {boolean} 是否登录
  */
-export const getLoginState = () => window.isLogined
+export const getLoginState = () => window.isLogined;
 
 /**
  * 判断是否开启公告
  * @returns {boolean} 是否开启公告
  */
-export const openNews = () => Boolean($('#profile_block').length)
+export const openNews = () => Boolean($('#profile_block').length);
 
 /**
  * 获取博客园昵称
@@ -24,17 +24,13 @@ export const openNews = () => Boolean($('#profile_block').length)
  */
 export function getBlogname() {
   if (openNews()) {
-    return $('#profile_block>a:nth-of-type(1)')
-      .html()
-      .trim()
+    return $('#profile_block>a:nth-of-type(1)').html().trim();
   }
-  const headerTitle = $('#Header1_HeaderTitle')
-    .text()
-    .trim()
+  const headerTitle = $('#Header1_HeaderTitle').text().trim();
   if (headerTitle.length) {
-    return headerTitle
+    return headerTitle;
   }
-  return currentBlogApp
+  return currentBlogApp;
 }
 
 /**
@@ -43,11 +39,9 @@ export function getBlogname() {
  */
 export function getFollowers() {
   const count = openNews()
-    ? $('#profile_block a:nth-of-type(3)')
-      .text()
-      .trim()
-    : '未知'
-  return count
+    ? $('#profile_block a:nth-of-type(3)').text().trim()
+    : '未知';
+  return count;
 }
 
 /**
@@ -56,11 +50,9 @@ export function getFollowers() {
  */
 export function getFollowing() {
   const count = openNews()
-    ? $('#profile_block a:nth-of-type(4)')
-      .text()
-      .trim()
-    : '未知'
-  return count
+    ? $('#profile_block a:nth-of-type(4)').text().trim()
+    : '未知';
+  return count;
 }
 
 /**
@@ -68,11 +60,7 @@ export function getFollowing() {
  * @returns {boolean} 是否已经关注
  */
 export function getFollowState() {
-  return (
-    $('#p_b_follow>a')
-      .text()
-      .trim() === '-取消关注'
-  )
+  return $('#p_b_follow>a').text().trim() === '-取消关注';
 }
 
 /**
@@ -81,10 +69,8 @@ export function getFollowState() {
  */
 export function getBlogAge() {
   return openNews()
-    ? $('#profile_block a:nth-of-type(2)')
-      .text()
-      .trim()
-    : '未知'
+    ? $('#profile_block a:nth-of-type(2)').text().trim()
+    : '未知';
 }
 
 /**
@@ -94,49 +80,50 @@ export function getBlogAge() {
 export function getCurrentPostUrl() {
   return !location.href.includes('#')
     ? location.href
-    : location.href.substring(0, location.href.lastIndexOf('#'))
+    : location.href.substring(0, location.href.lastIndexOf('#'));
 }
 
 /**
  * 获取博客园 user guid
  */
 export function getBlogUserGuid() {
-  const strValue = $('body>script:last').text()
-  const regex = /'([^"]*)'/g
-  return regex.exec(strValue)[1]
+  const strValue = $('body>script:last').text();
+  // eslint-disable-next-line prefer-named-capture-group
+  const regex = /'([^"]*)'/g;
+  return regex.exec(strValue)[1];
 }
 
 /**
  * 关注
  */
 export const follow = () => {
-  const guid = window.cb_blogUserGuid
+  const guid = window.cb_blogUserGuid;
   if (guid) {
-    window.follow(guid)
+    window.follow(guid);
   } else {
-    $('#p_b_follow>a').trigger('click')
+    $('#p_b_follow>a').trigger('click');
   }
-}
+};
 
 /**
  * 取消关注
  */
 export const unfollow = () => {
-  window.unfollow(window.cb_blogUserGuid)
-}
+  window.unfollow(window.cb_blogUserGuid);
+};
 
 /**
  * 判断文章是否打开了评论
  * @returns {boolean} 文章是否打开了评论
  */
-export const IsCommentTurnedOn = () => Boolean($('#tbCommentBody').length)
+export const IsCommentTurnedOn = () => Boolean($('#tbCommentBody').length);
 
 /**
  * 判断是否为博文详情页
  * @returns {boolean} 是否为博文详情页
  */
 export function isPostDetailsPage() {
-  return Boolean($('#post_detail').length)
+  return Boolean($('#post_detail').length);
 }
 
 /**
@@ -144,7 +131,7 @@ export function isPostDetailsPage() {
  * @returns {boolean} 是否为首页
  */
 export function isHomePage() {
-  return Boolean($('.day').length)
+  return Boolean($('.day').length);
 }
 
 /**
@@ -152,7 +139,7 @@ export function isHomePage() {
  * @returns {boolean} 是否为标签列表页
  */
 export function isTagListPage() {
-  return Boolean($('#taglist_main').length)
+  return Boolean($('#taglist_main').length);
 }
 
 /**
@@ -160,7 +147,7 @@ export function isTagListPage() {
  * @returns {boolean} 是否为博文详情页
  */
 export function isEntrylistPage() {
-  return Boolean($('.entrylistPosttitle').length)
+  return Boolean($('.entrylistPosttitle').length);
 }
 
 /**
@@ -168,7 +155,7 @@ export function isEntrylistPage() {
  * @returns {boolean} 是否为相册页
  */
 export function isAlbumPage() {
-  return Boolean($('.gallery').length)
+  return Boolean($('.gallery').length);
 }
 
 /**
@@ -176,7 +163,7 @@ export function isAlbumPage() {
  * @returns {boolean} 是否为博文分类页
  */
 export function isCategoryPage() {
-  return Boolean($('.entrylistItem').length)
+  return Boolean($('.entrylistItem').length);
 }
 
 /**
@@ -184,17 +171,22 @@ export function isCategoryPage() {
  * @returns {string} 'post' | 'index' | 'tag' | 'list' | 'tag' | 'taglist'
  */
 export function getCurrentPage() {
-  return $('#post_detail').length
-    ? 'post'
-    : $('.day').length
-      ? 'index'
-      : $('#taglist_main').length
-        ? 'tag'
-        : $('.entrylistPosttitle').length
-          ? 'list'
-          : $('#myposts').length
-            ? 'tag'
-            : void 0
+  const postDetailExists = $('#post_detail').length;
+  const dayExists = $('.day').length;
+  const taglistMainExists = $('#taglist_main').length;
+  const entrylistPosttitleExists = $('.entrylistPosttitle').length;
+  const mypostsExists = $('#myposts').length;
+
+  if (postDetailExists) {
+    return 'post';
+  } else if (dayExists) {
+    return 'index';
+  } else if (taglistMainExists || mypostsExists) {
+    return 'tag';
+  } else if (entrylistPosttitleExists) {
+    return 'list';
+  }
+  return undefined;
 }
 
 /**
@@ -202,7 +194,7 @@ export function getCurrentPage() {
  * @returns {boolean} 编辑器类型是否为 md
  */
 export function isMd() {
-  return $('#cnblogs_post_body').hasClass('cnblogs-markdown')
+  return $('#cnblogs_post_body').hasClass('cnblogs-markdown');
 }
 
 // TODO
@@ -217,9 +209,11 @@ export function isTinymce5() {}
  * @returns {boolean} 文章内容是否存在标题
  */
 export function hasPostTitle() {
-  return Boolean($(
-    '#cnblogs_post_body>h1,#cnblogs_post_body>h2,#cnblogs_post_body>h3,#cnblogs_post_body>h4',
-  ).length)
+  return Boolean(
+    $(
+      '#cnblogs_post_body>h1,#cnblogs_post_body>h2,#cnblogs_post_body>h3,#cnblogs_post_body>h4',
+    ).length,
+  );
 }
 
 /**
@@ -230,7 +224,7 @@ export function hasPostTitle() {
 export function likePost() {
   // const id = window.location.href.match(/p\/(\S*).html/)[1]
   // window.votePost(parseInt(id), 'Digg')
-  $('.diggit').trigger('click')
+  $('.diggit').trigger('click');
 }
 
 /**
@@ -242,10 +236,10 @@ export function getUserInfo() {
   return new Promise((resolve) => {
     $(document).ajaxComplete((event, xhr, settings) => {
       if (settings.url === 'https://account.cnblogs.com/user/userinfo') {
-        resolve($.parseJSON(xhr.responseText))
+        resolve($.parseJSON(xhr.responseText));
       }
-    })
-  })
+    });
+  });
 }
 
 /**
@@ -253,7 +247,7 @@ export function getUserInfo() {
  * @returns {(string|undefined)} 消息数
  */
 export function getMessageCount() {
-  return $('#msg_count').text()
+  return $('#msg_count').text();
 }
 
 /**
@@ -264,7 +258,7 @@ export function getPostCount() {
   return $('#stats_post_count')
     .text()
     .trim()
-    .replace(/[^0-9]/gi, '')
+    .replace(/[^0-9]/gi, '');
 }
 
 /**
@@ -275,7 +269,7 @@ export function getArticleCount() {
   return $('#stats_article_count')
     .text()
     .trim()
-    .replace(/[^0-9]/gi, '')
+    .replace(/[^0-9]/gi, '');
 }
 
 /**
@@ -286,7 +280,7 @@ export function getCommentCount() {
   return $('#stats-comment_count')
     .text()
     .trim()
-    .replace(/[^0-9]/gi, '')
+    .replace(/[^0-9]/gi, '');
 }
 
 /**
@@ -294,7 +288,5 @@ export function getCommentCount() {
  * @returns {string} 博客访问总量
  */
 export function getViewCount() {
-  return $('#stats-total-view-count>span')
-    .text()
-    .trim()
+  return $('#stats-total-view-count>span').text().trim();
 }

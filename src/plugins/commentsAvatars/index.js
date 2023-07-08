@@ -1,23 +1,23 @@
-import { getCurrentPage } from '../../utils/cnblog'
-import { poll } from '../../utils/helpers'
+import { getCurrentPage } from '../../utils/cnblog';
+import { poll } from '../../utils/helpers';
 
 /**
  * 构建头像
  */
 function buildAvatars() {
   if ($('.custom-comment-avatar').length) {
-    return
+    return;
   }
   $('.feedbackItem').each(function () {
-    let avatar = $(this).children('.feedbackCon').children('span:last').html()
+    let avatar = $(this).children('.feedbackCon').children('span:last').html();
 
     avatar = avatar
       ? avatar.replace('http://', 'https://')
-      : 'https://pic.cnblogs.com/face/sample_face.gif'
+      : 'https://pic.cnblogs.com/face/sample_face.gif';
 
-    const ele = `<div class='custom-comment-avatar'><img src="${avatar}" class='avatar' /></div>`
-    $(this).children('.feedbackCon').prepend(ele)
-  })
+    const ele = `<div class='custom-comment-avatar'><img src="${avatar}" class='avatar' /></div>`;
+    $(this).children('.feedbackCon').prepend(ele);
+  });
 }
 
 /**
@@ -25,8 +25,8 @@ function buildAvatars() {
  */
 function moveSupport() {
   $('.comment_vote').each(function () {
-    $(this).appendTo($(this).parent().siblings('.feedbackListSubtitle'))
-  })
+    $(this).appendTo($(this).parent().siblings('.feedbackListSubtitle'));
+  });
 }
 
 /**
@@ -34,48 +34,52 @@ function moveSupport() {
  */
 function authorRight() {
   $('.feedbackItem').each(function () {
-    const isAuthor = $(this).find('.louzhu').text() === '楼主'
-    if (isAuthor)
-    { $(this).addClass('custom-comments-author') }
-  })
+    const isAuthor = $(this).find('.louzhu').text() === '楼主';
+    if (isAuthor) {
+      $(this).addClass('custom-comments-author');
+    }
+  });
 }
 
 /**
  * 组合
  */
 function build() {
-  buildAvatars()
-  moveSupport()
-  authorRight()
+  buildAvatars();
+  moveSupport();
+  authorRight();
 }
 
 /**
  * 监听 ajax
  */
 function listener() {
-  window.renderCommentsAvatars = build
+  window.renderCommentsAvatars = build;
   $(document).ajaxComplete((event, xhr, option) => {
     if (
-      option.url.includes('PostComment/Add')
-      || option.url.includes('DeleteComment')
+      option.url.includes('PostComment/Add') ||
+      option.url.includes('DeleteComment')
     ) {
-      new blogCommentManager().renderComments(0)
+      // eslint-disable-next-line new-cap
+      new window.blogCommentManager().renderComments(0);
     }
-  })
+  });
   $(document).ajaxComplete((event, xhr, option) => {
     if (option.url.includes('GetComments')) {
-      window.renderCommentsAvatars()
-      window.buildEmojis()
-      window.imagebox()
+      window.renderCommentsAvatars();
+      window.buildEmojis();
+      window.imagebox();
     }
-  })
-  poll(() => $('.feedbackItem').length, build)
+  });
+  poll(() => $('.feedbackItem').length, build);
 }
 
 export const commentsAvatars = () => {
-  if (getCurrentPage() !== 'post')
-  { return }
-  if ($('.custom-comment-avatar').lenght)
-  { return }
-  listener()
-}
+  if (getCurrentPage() !== 'post') {
+    return;
+  }
+  if ($('.custom-comment-avatar').lenght) {
+    return;
+  }
+  listener();
+};

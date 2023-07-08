@@ -1,5 +1,5 @@
-import { createTheme } from '@acnb/core'
-import './index.scss'
+import { createTheme } from '@acnb/core';
+import './index.scss';
 import {
   codeHighlight,
   codeLinenumbers,
@@ -9,11 +9,13 @@ import {
   emoji,
   license,
   tools,
-} from '../src/index'
+  clickEffects,
+} from '../src/index';
 
-const theme = createTheme()
+const theme = createTheme();
 
 theme
+  .use(clickEffects, { enable: true })
   .use(emoji, { enable: true })
   .use(license, { enable: true })
   .use(darkMode, { enable: true })
@@ -62,4 +64,4 @@ theme
         },
       ],
     },
-  )
+  );

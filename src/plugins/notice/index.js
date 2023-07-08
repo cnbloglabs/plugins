@@ -1,16 +1,17 @@
-import { useNoticeOptions } from '@acnb/options'
-import toast from '../toast'
+import { useNoticeOptions } from '@acnb/options';
+import { toast } from '../toast';
 
 function shoot(contents) {
-  const length = contents.length
+  const length = contents.length;
   for (let i = 0; i < length; i++) {
-    toast(contents[i], 'info')
+    toast(contents[i], 'info');
   }
 }
 
 export const notice = (theme, devOptions) => {
-  const { enable, contents } = useNoticeOptions(devOptions)
-  if (!enable && contents.length)
-  { return }
-  shoot(contents)
-}
+  const { enable, contents } = useNoticeOptions(devOptions);
+  if (!enable && contents.length) {
+    return;
+  }
+  shoot(contents);
+};

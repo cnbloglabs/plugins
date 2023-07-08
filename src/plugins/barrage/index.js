@@ -1,28 +1,28 @@
 // 弹幕
-import { useBarragesOptions } from '@acnb/options'
-import { getCurrentPage } from '../../utils/cnblog'
+import { useBarragesOptions } from '@acnb/options';
 import {
   getClientRect,
   randomColor,
   randomNum,
   sleep,
-} from '../../utils/helpers'
+} from '../../utils/helpers';
 
 /**
  * @description 发送弹幕
  * @param {Array} textList 弹幕列表
  */
 async function shootBarrage(textList, enable, opacity, colors, fontSize) {
-  if (!enable)
-  { return }
+  if (!enable) {
+    return;
+  }
   if (!document.querySelector('#barrage-wrap')) {
-    $('body').append('<div id=\'barrage-wrap\'></div>')
+    $('body').append("<div id='barrage-wrap'></div>");
   }
 
-  const $wrap = document.querySelector('#barrage-wrap')
-  const rect = getClientRect($wrap)
-  const wrapWidth = rect.right - rect.left
-  const wrapHeight = rect.bottom - rect.top
+  const $wrap = document.querySelector('#barrage-wrap');
+  const rect = getClientRect($wrap);
+  const wrapWidth = rect.right - rect.left;
+  const wrapHeight = rect.bottom - rect.top;
 
   const defaultColors = [
     '#FE0302',
@@ -37,65 +37,58 @@ async function shootBarrage(textList, enable, opacity, colors, fontSize) {
     '#89D5FF',
     '#CC0273',
     '#CC0273',
-  ]
+  ];
 
   for (let i = 0; i < textList.length; i++) {
-    const text = textList[i]
-    const $barrage = document.createElement('span')
+    const text = textList[i];
+    const $barrage = document.createElement('span');
     const barrageStyle = `
 									left: ${wrapWidth}px;
 									top: ${randomNum(wrapHeight - 30, 1)}px;
 									color: ${randomColor(colors.length ? colors : defaultColors)};
 									opacity: ${opacity};
 									font-size: ${fontSize};
-								`
+								`;
 
-    $barrage.style.cssText = barrageStyle
-    $barrage.innerText = text
-    $wrap.appendChild($barrage)
+    $barrage.style.cssText = barrageStyle;
+    $barrage.innerText = text;
+    $wrap.appendChild($barrage);
 
     const roll = (timer) => {
-      const now = Number(new Date())
-      const rect = getClientRect($barrage)
-      let left = $barrage.offsetLeft
+      const now = Number(new Date());
+      const rect = getClientRect($barrage);
+      let left = $barrage.offsetLeft;
 
-      roll.last = roll.last || now
-      roll.timer = roll.timer || timer
+      roll.last = roll.last || now;
+      roll.timer = roll.timer || timer;
 
       if (left < rect.left - rect.right) {
-        $($barrage).remove()
+        $($barrage).remove();
       } else {
         if (now - roll.last >= roll.timer) {
-          roll.last = now
-          left -= 3
-          $barrage.style.left = `${left}px`
+          roll.last = now;
+          left -= 3;
+          $barrage.style.left = `${left}px`;
         }
-        window.requestAnimationFrame(roll)
+        window.requestAnimationFrame(roll);
       }
-    }
+    };
 
-    roll(randomNum(30, 1))
-    await sleep(1000)
+    roll(randomNum(30, 1));
+    // eslint-disable-next-line no-await-in-loop
+    await sleep(1000);
   }
 }
 
 export const barrage = (theme, devOptions) => {
-  const page = getCurrentPage()
-  const {
-    enable,
-    opacity,
-    colors,
-    fontSize,
-    barrages,
-    indexBarrages,
-    postPageBarrages,
-  } = useBarragesOptions(devOptions)
+  const { enable, opacity, colors, fontSize, barrages } =
+    useBarragesOptions(devOptions);
 
   if (barrages.length) {
     setTimeout(
       () => shootBarrage(barrages, enable, opacity, colors, fontSize),
       3000,
-    )
+    );
   }
 
   // if (page === 'post' && postPageBarrages.length) {
@@ -109,4 +102,4 @@ export const barrage = (theme, devOptions) => {
   //     shootBarrage(indexBarrages, enable, opacity, colors, fontSize)
   //   }, 3000)
   // }
-}
+};

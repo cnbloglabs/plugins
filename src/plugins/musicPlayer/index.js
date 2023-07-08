@@ -1,8 +1,8 @@
 // 音乐播放器
-import { useMusicPlayerOptions } from '@acnb/options'
-import { loadLink, loadScript, userAgent } from '../../utils/helpers'
-import { getCurrentPage } from '../../utils/cnblog'
-import { APlayerCss, APlayerJs } from '../../constants/cdn'
+import { useMusicPlayerOptions } from '@acnb/options';
+import { loadLink, loadScript, userAgent } from '../../utils/helpers';
+import { getCurrentPage } from '../../utils/cnblog';
+import { APlayerCss, APlayerJs } from '../../constants/cdn';
 
 /**
  * 构建音乐播放器
@@ -12,8 +12,9 @@ import { APlayerCss, APlayerJs } from '../../constants/cdn'
  * @param {*} lrc
  */
 function buildPlayer(autoplay, audio, volume, lrc) {
-  $('body').append('<div id="player" class="aplayer music-APlayer"></div>')
+  $('body').append('<div id="player" class="aplayer music-APlayer"></div>');
 
+  // eslint-disable-next-line no-undef
   const ap = new APlayer({
     container: document.getElementById('player'),
     fixed: true,
@@ -22,56 +23,59 @@ function buildPlayer(autoplay, audio, volume, lrc) {
     volume,
     lrcType: lrc.enable ? lrc.type : null,
     audio,
-  })
+  });
 
   window.onbeforeunload = () => {
-    const audioTime = ap.audio.currentTime
-    localStorage.audioTime = audioTime
-  }
+    const audioTime = ap.audio.currentTime;
+    localStorage.audioTime = audioTime;
+  };
 
   window.onload = () => {
-    ap.seek(localStorage.audioTime ? Number(localStorage.audioTime) : 0)
-  }
+    ap.seek(localStorage.audioTime ? Number(localStorage.audioTime) : 0);
+  };
 
   if (autoplay) {
-    $('.aplayer-lrc').show()
+    $('.aplayer-lrc').show();
   }
 
   if (localStorage.playerState === 'on') {
-    ap.play()
+    ap.play();
   }
 
   ap.on('play', () => {
-    localStorage.playerState = 'on'
+    localStorage.playerState = 'on';
     if (lrc.enable) {
-      $('.aplayer-lrc').show()
+      $('.aplayer-lrc').show();
     }
-  })
+  });
 
   ap.on('pause', () => {
-    localStorage.playerState = 'off'
+    localStorage.playerState = 'off';
     if (lrc.enable) {
-      $('.aplayer-lrc').hide()
+      $('.aplayer-lrc').hide();
     }
-  })
+  });
 
   if (lrc.enable && lrc.color !== '') {
-    $('.aplayer-lrc').css('color', lrc.color)
+    $('.aplayer-lrc').css('color', lrc.color);
   }
 }
 
 export const musicPlayer = (theme, devOptions) => {
-  const { enable, page, agent, autoplay, audio, volume, lrc }
-    = useMusicPlayerOptions(devOptions)
+  const { enable, page, agent, autoplay, audio, volume, lrc } =
+    useMusicPlayerOptions(devOptions);
 
-  if (!enable)
-  { return }
-  if (page !== getCurrentPage() && page !== 'all')
-  { return }
-  if (agent !== userAgent() && agent !== 'all')
-  { return }
-  loadLink(APlayerCss)
+  if (!enable) {
+    return;
+  }
+  if (page !== getCurrentPage() && page !== 'all') {
+    return;
+  }
+  if (agent !== userAgent() && agent !== 'all') {
+    return;
+  }
+  loadLink(APlayerCss);
   loadScript(APlayerJs, () => {
-    buildPlayer(autoplay, audio, volume, lrc)
-  })
-}
+    buildPlayer(autoplay, audio, volume, lrc);
+  });
+};

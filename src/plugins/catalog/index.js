@@ -1,68 +1,69 @@
-import { useCatalogOptions } from '@acnb/options'
-import { debounce, getClientRect, userAgent } from '../../utils/helpers'
-import { getCurrentPage, hasPostTitle } from '../../utils/cnblog'
+import { useCatalogOptions } from '@acnb/options';
+import { debounce, getClientRect, userAgent } from '../../utils/helpers';
+import { getCurrentPage, hasPostTitle } from '../../utils/cnblog';
 
 /**
  * 构建目录容器
  */
 function buildCatalogContainer(showTitle) {
-  const container = $('<nav id="catalog"></nav>')
+  const container = $('<nav id="catalog"></nav>');
   if (showTitle) {
-    container.append('<h3 class=\'catalog-title\'>目录</h3>')
+    container.append("<h3 class='catalog-title'>目录</h3>");
   }
-  return container
+  return container;
 }
 
 /**
  * 构建目录列表
  */
 function buildCatalogList() {
-  const $list = $('<ul>')
-  const regExp = /^h[1-6]$/
+  const $list = $('<ul>');
+  const regExp = /^h[1-6]$/;
 
   // $('#cnblogs_post_body')
   //     .children()
   $('#cnblogs_post_body :header').each(function (index) {
     if (regExp.test(this.tagName.toLowerCase())) {
-      const className = `${this.nodeName.toLowerCase()}-list`
-      const mathNode = $(this).children('.math.inline')
+      const className = `${this.nodeName.toLowerCase()}-list`;
+      const mathNode = $(this).children('.math.inline');
 
-      let text
-      let id
+      let text;
+      let id;
 
       if (mathNode.length) {
-        text
-          = mathNode.prop('outerHTML')
-          + $(this)
+        text =
+          mathNode.prop('outerHTML') +
+          $(this)
             .contents()
             .filter(function () {
-              return this.nodeType === 3
+              return this.nodeType === 3;
             })
-            .text()
+            .text();
       } else {
-        text = $(this).text()
+        text = $(this).text();
       }
 
-      if (text.length === 0)
-      { return } // 如果标题为空 只有 #
+      if (text.length === 0) {
+        return;
+      } // 如果标题为空 只有 #
 
       if (this.id !== '') {
-        id = this.id
+        id = this.id;
       } else {
-        id = text.trim()
-        $(this).attr('id', id)
+        id = text.trim();
+        $(this).attr('id', id);
       }
 
       const title = $(
         `<li class='${className}'><a href='#${id}'>${text}</a></li>`,
-      )
+      );
       if (index === 0) {
-        title.addClass('catalog-active')
+        title.addClass('catalog-active');
       }
-      $list.append(title)
+      $list.append(title);
     }
-  })
-  return $list
+  });
+  return $list;
 }
 
 /**
@@ -71,10 +72,10 @@ function buildCatalogList() {
  * @param {Function} fn
  */
 function buildCatalog(selector, fn, showTitle) {
-  const container = buildCatalogContainer(showTitle)
-  const catalogList = buildCatalogList()
-  const catalog = container.append(catalogList)
-  $(selector)[fn]($(catalog))
+  const container = buildCatalogContainer(showTitle);
+  const catalogList = buildCatalogList();
+  const catalog = container.append(catalogList);
+  $(selector)[fn]($(catalog));
 }
 
 /**
@@ -84,22 +85,22 @@ function handleScroll(scrollContainer, updateNavigation) {
   $(scrollContainer).scroll(
     debounce(
       () => {
-        setActiveTitle()
-        autoScroll(scrollContainer, updateNavigation)
+        setActiveTitle();
+        autoScroll(scrollContainer, updateNavigation);
       },
       50,
       1000 / 60,
     ),
-  )
+  );
 }
 
 // TODO: 目录自动滚动
 // https://stackoverflow.com/questions/61282426/fixed-sidebar-scroll-to-anchor-links-when-main-body-is-scrolled?r=SearchResults
 function autoScroll(scrollContainer, updateNavigation) {
   if (!updateNavigation) {
-    return
+    return;
   }
-  const navigation = $('#catalog')
+  const navigation = $('#catalog');
 
   if (scrollContainer.scrollY < 100) {
     return navigation.stop().animate(
@@ -107,19 +108,19 @@ function autoScroll(scrollContainer, updateNavigation) {
         scrollTop: 0,
       },
       800,
-    )
+    );
   }
 
   $('#cnblogs_post_body :header').each(function () {
-    const sectionName = $(this).attr('id')
-    const navigationMatch = $(`a[href="#${sectionName}"]`, navigation)
+    const sectionName = $(this).attr('id');
+    const navigationMatch = $(`a[href="#${sectionName}"]`, navigation);
 
     if (
-      $(this).offset().top - $(window).height() / 2 < $(window).scrollTop()
-      && $(this).offset().top + $(this).height() - $(window).height() / 2
-        > $(window).scrollTop()
+      $(this).offset().top - $(window).height() / 2 < $(window).scrollTop() &&
+      $(this).offset().top + $(this).height() - $(window).height() / 2 >
+        $(window).scrollTop()
     ) {
-      const position = navigationMatch.position().top + navigation.scrollTop()
+      const position = navigationMatch.position().top + navigation.scrollTop();
 
       // TODO: Use cached selector, exit .each() when first occurrence found
       return navigation.stop().animate(
@@ -127,9 +128,9 @@ function autoScroll(scrollContainer, updateNavigation) {
           scrollTop: position,
         },
         800,
-      )
+      );
     }
-  })
+  });
 }
 
 /**
@@ -141,16 +142,17 @@ function setActiveTitle() {
     const titleId = $($('#catalog ul li')[i])
       .find('a')
       .attr('href')
-      .replace(/[#]/g, '')
+      .replace(/[#]/g, '');
     const postTitle = document.querySelector(
       `#cnblogs_post_body [id='${titleId}']`,
-    )
+    );
     if (getClientRect(postTitle).top <= 100) {
-      if ($($('#catalog ul li')[i]).hasClass('catalog-active'))
-      { return }
-      $($('#catalog ul li')[i]).addClass('catalog-active')
-      $($('#catalog ul li')[i]).siblings().removeClass('catalog-active')
-      return
+      if ($($('#catalog ul li')[i]).hasClass('catalog-active')) {
+        return;
+      }
+      $($('#catalog ul li')[i]).addClass('catalog-active');
+      $($('#catalog ul li')[i]).siblings().removeClass('catalog-active');
+      return;
     }
   }
 }
@@ -163,9 +165,9 @@ function toggle() {
     $('#catalog ul').toggle('fast', 'linear', function () {
       $(this).css('display') === 'none'
         ? $('.catalog-title').removeClass('is-active')
-        : $('.catalog-title').addClass('is-active')
-    })
-  })
+        : $('.catalog-title').addClass('is-active');
+    });
+  });
 }
 
 /**
@@ -176,7 +178,7 @@ function setScrollbar(showScrollbar) {
   if (!showScrollbar) {
     $('#catalog').css({
       overflow: 'hidden',
-    })
+    });
   }
 }
 
@@ -188,24 +190,24 @@ export function catalog(theme, devOptions, pluginOptions = {}) {
     updateNavigation: false,
     showTitle: true,
     showScrollbar: true,
-  }
-  $.extend(true, extraOptions, pluginOptions)
+  };
+  $.extend(true, extraOptions, pluginOptions);
 
-  const { enable } = useCatalogOptions(devOptions)
+  const { enable } = useCatalogOptions(devOptions);
 
   if (
-    enable
-    && hasPostTitle()
-    && getCurrentPage() === 'post'
-    && userAgent() === 'pc'
+    enable &&
+    hasPostTitle() &&
+    getCurrentPage() === 'post' &&
+    userAgent() === 'pc'
   ) {
     buildCatalog(
       extraOptions.mountedNode,
       extraOptions.fn,
       extraOptions.showTitle,
-    )
-    handleScroll(extraOptions.scrollContainer, extraOptions.updateNavigation)
-    toggle()
-    setScrollbar(extraOptions.showScrollbar)
+    );
+    handleScroll(extraOptions.scrollContainer, extraOptions.updateNavigation);
+    toggle();
+    setScrollbar(extraOptions.showScrollbar);
   }
 }

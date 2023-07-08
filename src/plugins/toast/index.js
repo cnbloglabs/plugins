@@ -1,7 +1,7 @@
-import { Notyf } from 'notyf'
-import 'notyf/notyf.min.css'
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
-export default (message, type = 'success', duration) => {
+export function toast(message, type = 'success', duration) {
   const notyf = new Notyf({
     position: { x: 'right', y: 'top' },
     icon: false,
@@ -30,7 +30,7 @@ export default (message, type = 'success', duration) => {
         dismissible: true,
       },
     ],
-  })
+  });
 
   if (type === 'info') {
     notyf.open({
@@ -38,12 +38,12 @@ export default (message, type = 'success', duration) => {
       message,
       duration,
       icon: false,
-    })
+    });
   } else {
     notyf[type]({
       message,
       duration,
       icon: false,
-    })
+    });
   }
 }

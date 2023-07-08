@@ -1,11 +1,11 @@
 // 锁屏
-import { useLockScreenOptions } from '@acnb/options'
-import { loadScript } from '../../utils/helpers'
-import { typedJs } from '../../constants/cdn'
+import { useLockScreenOptions } from '@acnb/options';
+import { loadScript } from '../../utils/helpers';
+import { typedJs } from '../../constants/cdn';
 
-const randomImage = 'https://api.mz-moe.cn/img.php'
+const randomImage = 'https://api.mz-moe.cn/img.php';
 
-let typed
+let typed;
 
 /**
  * 创建元素
@@ -20,7 +20,7 @@ function build() {
             </div>
         </div>
         <div class="lock-screen-close">🔑</div>
-    </div>`)
+    </div>`);
 }
 
 /**
@@ -28,8 +28,8 @@ function build() {
  * @param {*} background
  */
 function setBackground(background) {
-  const image = background === '' ? randomImage : background
-  $('.lock-screen').css('background-image', `url(${image})`)
+  const image = background === '' ? randomImage : background;
+  $('.lock-screen').css('background-image', `url(${image})`);
 }
 
 /**
@@ -40,12 +40,13 @@ function handleOpen(strings) {
   const typedOpts = {
     strings: strings.length ? strings : ['快去自定义你的个性签名吧~'],
     typeSpeed: 100,
-  }
+  };
   $('#header').dblclick(() => {
-    $('body').addClass('overflow')
-    $('.lock-screen').css('top', '0')
-    typed = new Typed('.lock-screen-text span', typedOpts)
-  })
+    $('body').addClass('overflow');
+    $('.lock-screen').css('top', '0');
+    // eslint-disable-next-line no-undef
+    typed = new Typed('.lock-screen-text span', typedOpts);
+  });
 }
 
 /**
@@ -53,23 +54,24 @@ function handleOpen(strings) {
  */
 function handleClose() {
   $(document).on('click', '.lock-screen-close', () => {
-    $('.lock-screen').css('top', '-100vh')
-    typed.destroy()
+    $('.lock-screen').css('top', '-100vh');
+    typed.destroy();
     setTimeout(() => {
-      $('body').removeClass('overflow')
-    }, 400)
-  })
+      $('body').removeClass('overflow');
+    }, 400);
+  });
 }
 
 export const lock = (theme, devOptions) => {
-  const { enable, background, strings } = useLockScreenOptions(devOptions)
-  if (!enable)
-  { return }
-  build()
-  setBackground(background)
+  const { enable, background, strings } = useLockScreenOptions(devOptions);
+  if (!enable) {
+    return;
+  }
+  build();
+  setBackground(background);
 
   loadScript(typedJs, () => {
-    handleOpen(strings)
-    handleClose()
-  })
-}
+    handleOpen(strings);
+    handleClose();
+  });
+};
