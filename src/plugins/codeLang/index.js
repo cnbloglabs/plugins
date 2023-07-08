@@ -3,7 +3,7 @@
  * 仅在 Markdown 博文中生效
  */
 import { useCodeLangOptions } from '@acnb/options'
-import { isPostDetailsPage, isMd } from '../../utils/cnblog'
+import { isMd, isPostDetailsPage } from '../../utils/cnblog'
 
 /**
  * 创建代码语言容器
@@ -39,9 +39,12 @@ function buildCodeWrapLanguage() {
 export const codeLang = (theme, devOptions) => {
   const { enable } = useCodeLangOptions(devOptions)
 
-  if (!enable) return
-  if (!isPostDetailsPage()) return
-  if (!isMd()) return
+  if (!enable)
+  { return }
+  if (!isPostDetailsPage())
+  { return }
+  if (!isMd())
+  { return }
 
   buildCodeWrapLanguage()
 }

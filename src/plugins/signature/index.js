@@ -1,15 +1,15 @@
 // 个性签名
-import { useSignatureOptions } from "@acnb/options";
-import { loadScript } from "../../utils/helpers";
-import { typedJs } from "../../constants/cdn";
+import { useSignatureOptions } from '@acnb/options'
+import { loadScript } from '../../utils/helpers'
+import { typedJs } from '../../constants/cdn'
 
 /**
  * 构建容器
  * @param {*} selector
  */
 function build(selector) {
-  const el = `<div class='custom-signature'><span></span></div>`;
-  $(selector).append(el);
+  const el = '<div class=\'custom-signature\'><span></span></div>'
+  $(selector).append(el)
 }
 
 /**
@@ -18,27 +18,28 @@ function build(selector) {
  */
 function typed(contents) {
   loadScript(typedJs, () => {
-    new Typed(".custom-signature span", {
+    new Typed('.custom-signature span', {
       strings: contents,
       typeSpeed: 70,
-    });
-  });
+    })
+  })
 }
 
 export const signature = (theme, devOptions, pluginOptions) => {
-  const { enable, contents } = useSignatureOptions(devOptions);
-  if (!enable) return;
+  const { enable, contents } = useSignatureOptions(devOptions)
+  if (!enable)
+  { return }
 
   let pluginConfig = {
-    selector: "#sidebar_news",
-  };
-
-  if (pluginOptions) {
-    pluginConfig = Object.assign({}, pluginConfig, pluginOptions);
+    selector: '#sidebar_news',
   }
 
-  const { selector } = pluginConfig;
+  if (pluginOptions) {
+    pluginConfig = { ...pluginConfig, ...pluginOptions}
+  }
 
-  build(selector);
-  typed(contents);
-};
+  const { selector } = pluginConfig
+
+  build(selector)
+  typed(contents)
+}

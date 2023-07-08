@@ -1,7 +1,7 @@
 // 构建随笔签名
 import { useLicenseOptions } from '@acnb/options'
-import { getCurrentPage } from '../../utils/cnblog'
-import { getBlogname, getCurrentPostUrl } from '../../utils/cnblog'
+import { getCurrentPage , getBlogname, getCurrentPostUrl } from '../../utils/cnblog'
+
 
 const containerId = 'post-signature'
 
@@ -40,7 +40,7 @@ const buildLicense = (enableLicense, licenseName, licenseLink) => {
 function buildContent(content) {
   let el = ''
   for (let i = 0; i < content.length; i++) {
-    el += '<p>' + content[i] + '</p>'
+    el += `<p>${  content[i]  }</p>`
   }
   $(`#${containerId}`).append(el)
 }

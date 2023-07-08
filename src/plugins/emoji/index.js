@@ -1,7 +1,7 @@
 // 评论输入表情
-import { useEmojiOptions } from "@acnb/options";
-import { isPostDetailsPage } from "../../utils/cnblog";
-import { isUrl } from "../../utils/helpers";
+import { useEmojiOptions } from '@acnb/options'
+import { isPostDetailsPage } from '../../utils/cnblog'
+import { isUrl } from '../../utils/helpers'
 
 const defaultEmojiList = [
   {
@@ -28,15 +28,15 @@ const defaultEmojiList = [
     value: '👀',
     label: '',
   },
-];
+]
 
 /**
  * 创建按钮
  * @returns {HTMLElement}
  */
 function createEmojiButton(buttonIcon) {
-  return `<span class="qaq-btn" title="表情">${buttonIcon.length ? buttonIcon : "🍺"
-    }</span>`;
+  return `<span class="qaq-btn" title="表情">${buttonIcon.length ? buttonIcon : '🍺'
+    }</span>`
 }
 
 /**
@@ -45,21 +45,21 @@ function createEmojiButton(buttonIcon) {
  * @returns
  */
 function createEmojiItem(itemData) {
-  const { value, label } = itemData;
-  const el = $("<div>").addClass("emoji-item");
+  const { value, label } = itemData
+  const el = $('<div>').addClass('emoji-item')
 
   if (isUrl(value)) {
-    const emoji = $("<img />").addClass("emoji emoji-img").attr("src", value);
-    el.append(emoji);
+    const emoji = $('<img />').addClass('emoji emoji-img').attr('src', value)
+    el.append(emoji)
   } else {
-    el.append(`<div class="emoji emoji-text">${value}</div>`);
+    el.append(`<div class="emoji emoji-text">${value}</div>`)
   }
 
-  if (typeof label === "string") {
-    el.attr("title", label);
+  if (typeof label === 'string') {
+    el.attr('title', label)
   }
 
-  return el;
+  return el
 }
 
 /**
@@ -68,15 +68,16 @@ function createEmojiItem(itemData) {
  * @returns {JQuery Object}
  */
 function createEmojiList(emojiList) {
-  if (!emojiList.length) emojiList = defaultEmojiList;
-  const $emoji = $(`<div class="emoji-list"></div>`);
+  if (!emojiList.length)
+  { emojiList = defaultEmojiList }
+  const $emoji = $('<div class="emoji-list"></div>')
 
   emojiList.forEach((item) => {
-    const emojiItem = createEmojiItem(item);
-    $emoji.append(emojiItem);
-  });
+    const emojiItem = createEmojiItem(item)
+    $emoji.append(emojiItem)
+  })
 
-  return $emoji;
+  return $emoji
 }
 
 /**
@@ -84,7 +85,7 @@ function createEmojiList(emojiList) {
  * @returns {JQuery Object}
  */
 function createEmojiContainer() {
-  return $(`<div>`).addClass("qaq-wrap anim-scale-in");
+  return $('<div>').addClass('qaq-wrap anim-scale-in')
 }
 
 /**
@@ -92,37 +93,37 @@ function createEmojiContainer() {
  * @returns {JQuery Object}
  */
 function createMask() {
-  return $(`<div>`).addClass("qaq-mask");
+  return $('<div>').addClass('qaq-mask')
 }
 
 /**
  * 打开或关闭表情面板
  */
 function qaqToggle() {
-  $(".qaq-wrap").toggle();
+  $('.qaq-wrap').toggle()
 }
 
 /**
  * 选择表情
  */
 function selectEmoji() {
-  $(".emoji-item").click(function () {
-    const $emoji = $(this).find(".emoji");
-    let emojiValue;
+  $('.emoji-item').click(function () {
+    const $emoji = $(this).find('.emoji')
+    let emojiValue
 
-    const isImgEmoji = $emoji.hasClass("emoji-img");
+    const isImgEmoji = $emoji.hasClass('emoji-img')
 
     if (isImgEmoji) {
-      const url = $emoji.attr("src");
-      emojiValue = `![](${url})`;
+      const url = $emoji.attr('src')
+      emojiValue = `![](${url})`
     } else {
-      const textEmoji = $emoji.html();
-      emojiValue = textEmoji;
+      const textEmoji = $emoji.html()
+      emojiValue = textEmoji
     }
 
-    document.querySelector("#tbCommentBody").value += emojiValue;
-    qaqToggle();
-  });
+    document.querySelector('#tbCommentBody').value += emojiValue
+    qaqToggle()
+  })
 }
 
 /**
@@ -130,36 +131,40 @@ function selectEmoji() {
  * @param {Array} emojiData
  */
 function createEmoji(emojiData, buttonIcon) {
-  const button = createEmojiButton(buttonIcon);
-  const emojiContainer = createEmojiContainer();
-  const mask = createMask();
-  const emojiList = createEmojiList(emojiData);
+  const button = createEmojiButton(buttonIcon)
+  const emojiContainer = createEmojiContainer()
+  const mask = createMask()
+  const emojiList = createEmojiList(emojiData)
 
-  emojiContainer.append(emojiList).append(mask);
+  emojiContainer.append(emojiList).append(mask)
 
-  $(".commentbox_title_right").prepend(button).css("position", "relative");
+  $('.commentbox_title_right').prepend(button).css('position', 'relative')
 
-  $(".qaq-btn")
+  $('.qaq-btn')
     .after(emojiContainer)
-    .click(() => qaqToggle());
+    .click(() => qaqToggle())
 
-  $(".qaq-mask").click(() => qaqToggle());
+  $('.qaq-mask').click(() => qaqToggle())
 
-  selectEmoji();
+  selectEmoji()
 }
 
 export const emoji = (_theme, devOptions) => {
-  const { enable, emojiList, buttonIcon } = useEmojiOptions(devOptions);
+  const { enable, emojiList, buttonIcon } = useEmojiOptions(devOptions)
 
-  if (!enable) return;
-  if (!isPostDetailsPage()) return;
+  if (!enable)
+  { return }
+  if (!isPostDetailsPage())
+  { return }
 
   const builder = () => {
-    if ($(".qaq-btn").length) return;
-    if (!$(".commentbox_title_right").length) return;
-    createEmoji(emojiList, buttonIcon);
-  };
+    if ($('.qaq-btn').length)
+    { return }
+    if (!$('.commentbox_title_right').length)
+    { return }
+    createEmoji(emojiList, buttonIcon)
+  }
 
-  builder();
-  window.buildEmojis = builder;
-};
+  builder()
+  window.buildEmojis = builder
+}

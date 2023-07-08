@@ -1,6 +1,6 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import { injectHtml } from 'vite-plugin-html'
-import { resolve } from 'path'
 
 export default defineConfig({
   server: {
@@ -27,7 +27,7 @@ export default defineConfig({
     {
       ...injectHtml({
         injectData: {
-          injectScript: `<script type="module" src="../../example/index.js"></script>`,
+          injectScript: '<script type="module" src="../../example/index.js"></script>',
         },
       }),
       apply: 'serve',

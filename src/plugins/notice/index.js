@@ -10,6 +10,7 @@ function shoot(contents) {
 
 export const notice = (theme, devOptions) => {
   const { enable, contents } = useNoticeOptions(devOptions)
-  if (!enable && contents.length) return
+  if (!enable && contents.length)
+  { return }
   shoot(contents)
 }

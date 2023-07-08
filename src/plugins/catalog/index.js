@@ -1,14 +1,14 @@
 import { useCatalogOptions } from '@acnb/options'
-import { userAgent, getClientRect, debounce } from '../../utils/helpers'
+import { debounce, getClientRect, userAgent } from '../../utils/helpers'
 import { getCurrentPage, hasPostTitle } from '../../utils/cnblog'
 
 /**
  * 构建目录容器
  */
 function buildCatalogContainer(showTitle) {
-  const container = $(`<nav id="catalog"></nav>`)
+  const container = $('<nav id="catalog"></nav>')
   if (showTitle) {
-    container.append(`<h3 class='catalog-title'>目录</h3>`)
+    container.append('<h3 class=\'catalog-title\'>目录</h3>')
   }
   return container
 }
@@ -31,9 +31,9 @@ function buildCatalogList() {
       let id
 
       if (mathNode.length) {
-        text =
-          mathNode.prop('outerHTML') +
-          $(this)
+        text
+          = mathNode.prop('outerHTML')
+          + $(this)
             .contents()
             .filter(function () {
               return this.nodeType === 3
@@ -43,7 +43,8 @@ function buildCatalogList() {
         text = $(this).text()
       }
 
-      if (text.length === 0) return // 如果标题为空 只有 #
+      if (text.length === 0)
+      { return } // 如果标题为空 只有 #
 
       if (this.id !== '') {
         id = this.id
@@ -53,7 +54,7 @@ function buildCatalogList() {
       }
 
       const title = $(
-        `<li class='${className}'><a href='#${id}'>${text}</a></li>`
+        `<li class='${className}'><a href='#${id}'>${text}</a></li>`,
       )
       if (index === 0) {
         title.addClass('catalog-active')
@@ -87,8 +88,8 @@ function handleScroll(scrollContainer, updateNavigation) {
         autoScroll(scrollContainer, updateNavigation)
       },
       50,
-      1000 / 60
-    )
+      1000 / 60,
+    ),
   )
 }
 
@@ -105,27 +106,27 @@ function autoScroll(scrollContainer, updateNavigation) {
       {
         scrollTop: 0,
       },
-      800
+      800,
     )
   }
 
   $('#cnblogs_post_body :header').each(function () {
     const sectionName = $(this).attr('id')
-    const navigationMatch = $('a[href="#' + sectionName + '"]', navigation)
+    const navigationMatch = $(`a[href="#${sectionName}"]`, navigation)
 
     if (
-      $(this).offset().top - $(window).height() / 2 < $(window).scrollTop() &&
-      $(this).offset().top + $(this).height() - $(window).height() / 2 >
-        $(window).scrollTop()
+      $(this).offset().top - $(window).height() / 2 < $(window).scrollTop()
+      && $(this).offset().top + $(this).height() - $(window).height() / 2
+        > $(window).scrollTop()
     ) {
       const position = navigationMatch.position().top + navigation.scrollTop()
 
-      //TODO: Use cached selector, exit .each() when first occurrence found
+      // TODO: Use cached selector, exit .each() when first occurrence found
       return navigation.stop().animate(
         {
           scrollTop: position,
         },
-        800
+        800,
       )
     }
   })
@@ -142,10 +143,11 @@ function setActiveTitle() {
       .attr('href')
       .replace(/[#]/g, '')
     const postTitle = document.querySelector(
-      `#cnblogs_post_body [id='${titleId}']`
+      `#cnblogs_post_body [id='${titleId}']`,
     )
     if (getClientRect(postTitle).top <= 100) {
-      if ($($('#catalog ul li')[i]).hasClass('catalog-active')) return
+      if ($($('#catalog ul li')[i]).hasClass('catalog-active'))
+      { return }
       $($('#catalog ul li')[i]).addClass('catalog-active')
       $($('#catalog ul li')[i]).siblings().removeClass('catalog-active')
       return
@@ -157,7 +159,7 @@ function setActiveTitle() {
  * 目录显示隐藏
  */
 function toggle() {
-  $('.catalog-title').click(function () {
+  $('.catalog-title').click(() => {
     $('#catalog ul').toggle('fast', 'linear', function () {
       $(this).css('display') === 'none'
         ? $('.catalog-title').removeClass('is-active')
@@ -192,15 +194,15 @@ export function catalog(theme, devOptions, pluginOptions = {}) {
   const { enable } = useCatalogOptions(devOptions)
 
   if (
-    enable &&
-    hasPostTitle() &&
-    getCurrentPage() === 'post' &&
-    userAgent() === 'pc'
+    enable
+    && hasPostTitle()
+    && getCurrentPage() === 'post'
+    && userAgent() === 'pc'
   ) {
     buildCatalog(
       extraOptions.mountedNode,
       extraOptions.fn,
-      extraOptions.showTitle
+      extraOptions.showTitle,
     )
     handleScroll(extraOptions.scrollContainer, extraOptions.updateNavigation)
     toggle()

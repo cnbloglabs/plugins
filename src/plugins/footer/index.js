@@ -9,7 +9,7 @@ function buildCopyright() {
   const el = `<div id='copyright'>
                     <span>Copyright © ${new Date().getFullYear()} ${nickName}</span>
                     <span> Powered by you 🌊 Theme in ${'acnb'.link(
-                      '#'
+                      '#',
                     )}</span>
                 </div>`
 
@@ -23,8 +23,8 @@ function buildCustomLinks(devOptions) {
   const config = useLinksOptions(devOptions)
 
   if (config.links.length) {
-    let $links = $('<ul id="links"></ul>')
-    for (let { title, url } of config.links) {
+    const $links = $('<ul id="links"></ul>')
+    for (const { title, url } of config.links) {
       $links.append(`<li><a href='${url}'>${title}</a></li>`)
     }
     $('#footer').prepend($links.prop('outerHTML'))

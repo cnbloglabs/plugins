@@ -23,9 +23,9 @@ function createCategoriesAndTags() {
   const wrap = $('<div>').addClass('message-top')
 
   const createCategories = () => {
-    const categories = $(`<div>`).addClass('message-categories').text('📂')
+    const categories = $('<div>').addClass('message-categories').text('📂')
     if (!$('#BlogPostCategory a').length) {
-      categories.append(`<a>未分类</a>`)
+      categories.append('<a>未分类</a>')
       return categories
     }
     $('#BlogPostCategory a').each(function () {
@@ -35,9 +35,9 @@ function createCategoriesAndTags() {
   }
 
   const createTags = () => {
-    const tags = $(`<div>`).addClass('message-tags').text('🔖')
+    const tags = $('<div>').addClass('message-tags').text('🔖')
     if (!$('#EntryTag a').length) {
-      tags.append(`<a>无标签</a>`)
+      tags.append('<a>无标签</a>')
       return tags
     }
     $('#EntryTag a').each(function () {
@@ -78,10 +78,11 @@ function buildPostMessage() {
 }
 
 export const postMessage = () => {
-  if (!isPostDetailsPage()) return
+  if (!isPostDetailsPage())
+  { return }
 
   poll(
     () => $('#EntryTag a').length && $('#BlogPostCategory a').length,
-    buildPostMessage
+    buildPostMessage,
   )
 }

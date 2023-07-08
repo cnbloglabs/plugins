@@ -2,36 +2,38 @@
   "name": "@acnb/plugins",
   "version": "0.5.1",
   "description": "",
-  "main": "./src/index.js",
-  "module": "./src/index.js",
-  "scripts": {
-    "dev": "vite"
-  },
-  "exports": {
-    ".": {
-      "import": "./src/index.js"
-    }
-  },
-  "files": [
-    "src"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acnblogs/acnb-plugins.git"
-  },
-  "keywords": [
-    "博客园"
-  ],
   "author": {
     "name": "guangzan",
     "url": "https://www.cnblogs.com/guangzan",
     "email": "guangzan1999@outlook.com"
   },
   "license": "MIT",
+  "homepage": "https://github.com/acnblogs/acnb-plugins#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acnblogs/acnb-plugins.git"
+  },
   "bugs": {
     "url": "https://github.com/acnblogs/acnb-plugins/issues"
   },
-  "homepage": "https://github.com/acnblogs/acnb-plugins#readme",
+  "keywords": [
+    "博客园"
+  ],
+  "exports": {
+    ".": {
+      "import": "./src/index.js"
+    }
+  },
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "dependencies": {
     "@acnb/core": "^1.0.8",
     "@acnb/options": "^0.2.9",
@@ -39,9 +41,11 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.19",
+    "@vercel/style-guide": "^4.0.2",
     "sass": "^1.42.1",
     "vite": "^3.0.0",
     "vite-plugin-html": "^2.1.0",
     "vite-plugin-singlefile": "^0.5.1"
-  }
+  },
+  "prettier": "@vercel/style-guide/prettier"
 }

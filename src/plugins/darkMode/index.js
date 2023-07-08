@@ -103,10 +103,11 @@ function listenToggleButtonClick() {
 }
 
 export const darkMode = (theme, devOptions) => {
-  const { enable, darkDefault, autoDark, autoLight } =
-    useDarkModeOptions(devOptions)
+  const { enable, darkDefault, autoDark, autoLight }
+    = useDarkModeOptions(devOptions)
 
-  if (!enable) return
+  if (!enable)
+  { return }
   init(darkDefault, autoDark, autoLight)
   listenToggleButtonClick()
 }

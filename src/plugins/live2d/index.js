@@ -1,5 +1,5 @@
 import { useLive2dOptions } from '@acnb/options'
-import { userAgent, loadScript, randomProperty } from '../../utils/helpers'
+import { loadScript, randomProperty, userAgent } from '../../utils/helpers'
 import { getCurrentPage } from '../../utils/cnblog'
 import live2dModels from './live2dModels'
 
@@ -23,7 +23,8 @@ function buildContainer(position, width, height) {
  * @param {String} gap
  */
 function setGap(position, gap) {
-  if (gap === 'default') return
+  if (gap === 'default')
+  { return }
   $('#model').css(position, gap)
 }
 
@@ -32,8 +33,8 @@ function setGap(position, gap) {
  * @param {String} model
  */
 function loadModel(model) {
-  let live2dModel =
-    model === 'random'
+  const live2dModel
+    = model === 'random'
       ? live2dModels[randomProperty(live2dModels)]
       : live2dModels[model]
 
@@ -44,12 +45,15 @@ function loadModel(model) {
 }
 
 export const live2d = (theme, devOptions) => {
-  const { enable, page, agent, model, position, gap, width, height } =
-    useLive2dOptions(devOptions)
+  const { enable, page, agent, model, position, gap, width, height }
+    = useLive2dOptions(devOptions)
 
-  if (!enable) return
-  if (page !== getCurrentPage() && page !== 'all') return
-  if (agent !== userAgent() && agent !== 'all') return
+  if (!enable)
+  { return }
+  if (page !== getCurrentPage() && page !== 'all')
+  { return }
+  if (agent !== userAgent() && agent !== 'all')
+  { return }
 
   buildContainer(position, width, height)
   setGap(position, gap)

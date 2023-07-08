@@ -1,5 +1,5 @@
 import { useBackgroundOptions } from '@acnb/options'
-import { userAgent, isUrl } from '../../utils/helpers'
+import { isUrl, userAgent } from '../../utils/helpers'
 
 /**
  * 设置透明度
@@ -24,7 +24,7 @@ function setBackground(value, repeat) {
     $('body').css('background-image', `url(${value})`)
     if (!repeat) {
       $('body').css({
-        'background-repeat': `no-repeat`,
+        'background-repeat': 'no-repeat',
         'background-size': '100% 100%',
         'background-attachment': 'fixed',
       })
@@ -38,15 +38,14 @@ function setBackground(value, repeat) {
 export const background = (theme, devOptions, pluginOptions) => {
   const { enable, opacity, value, repeat } = useBackgroundOptions(devOptions)
 
-  if (!enable) return
+  if (!enable)
+  { return }
 
-  const { opacitySelector } = Object.assign(
-    {},
-    {
-      opacitySelector: '#main,#navigator',
-    },
-    pluginOptions
-  )
+  const { opacitySelector } = {
+    
+    opacitySelector: '#main,#navigator',
+    ...pluginOptions,
+  }
 
   setBackground(value, repeat)
   setOpacity(opacity, opacitySelector)
