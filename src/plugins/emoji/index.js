@@ -68,10 +68,11 @@ function createEmojiItem(itemData) {
  * @param {Array} emojiList
  * @returns {JQuery Object}
  */
-function createEmojiList(emojiList = defaultEmojiList) {
+function createEmojiList(emojiList) {
+  const emojis = emojiList?.length ? emojiList : defaultEmojiList
   const $emoji = $('<div class="emoji-list"></div>');
 
-  emojiList.forEach((item) => {
+  emojis.forEach((item) => {
     const emojiItem = createEmojiItem(item);
     $emoji.append(emojiItem);
   });
